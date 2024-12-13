@@ -6,7 +6,7 @@ generator client {
 datasource db {
   provider     = "postgresql"
   url          = "postgresql://postgres.xevfbhgsxocotheazuuo:Kvbq8GVyGh29Vudw@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=10&connect_timeout=30"
-  directUrl    = env("DATABASE_URL_UNPOOLED")
+  directUrl    = "postgresql://postgres.xevfbhgsxocotheazuuo:Kvbq8GVyGh29Vudw@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres?connection_limit=10&connect_timeout=30&pool_timeout=30"
   extensions   = [citext]
   relationMode = "prisma"
 }

@@ -8,11 +8,11 @@ export default function DashboardPage() {
     <>
       <H3>Dashboard</H3>
 
-      <div className="grid grid-cols-2 gap-4 overflow-clip md:grid-cols-3 lg:grid-cols-6">
+      {/* <div className="grid grid-cols-2 gap-4 overflow-clip md:grid-cols-3 lg:grid-cols-6">
         <StatsCard />
         <AnalyticsCard className="col-span-full lg:col-span-3" />
         <ScheduledCard className="col-span-full lg:col-span-3" />
-      </div>
+      </div> */}
     </>
   )
 }
