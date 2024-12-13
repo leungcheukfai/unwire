@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 import { auth } from "~/lib/auth"
 
 export const config = {
-  matcher: "/admin/:path*",
+  matcher: "/admins/:path*",
 }
 
 export default auth(req => {
