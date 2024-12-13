@@ -6,7 +6,7 @@ import { cache } from "~/lib/cache"
 import { prisma } from "~/services/prisma"
 import { searchParamsSchema } from "./validations"
 
-export const findTools = cache(
+export const findTools = 
   async (searchParams: SearchParams) => {
     const search = searchParamsSchema.parse(searchParams)
     const { page, per_page, sort, name, status, operator, from, to } = search
@@ -57,10 +57,7 @@ export const findTools = cache(
 
     const pageCount = Math.ceil(toolsTotal / per_page)
     return { tools, toolsTotal, pageCount }
-  },
-  ["admin-tools", "tools"],
-)
-
+  }
 export const findScheduledTools = cache(async () => {
   return prisma.tool.findMany({
     where: { status: ToolStatus.Scheduled },
@@ -69,12 +66,12 @@ export const findScheduledTools = cache(async () => {
   })
 }, ["schedule"])
 
-export const findToolList = cache(async () => {
+export const findToolList = async () => {
   return prisma.tool.findMany({
     select: { id: true, name: true },
     orderBy: { name: "asc" },
   })
-}, ["admin-tools", "tools"])
+}
 
 export const findToolBySlug = (slug: string) =>
   cache(

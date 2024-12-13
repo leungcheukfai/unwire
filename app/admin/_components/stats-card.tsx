@@ -2,7 +2,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from "~/components/admin
 import { cache } from "~/lib/cache"
 import { prisma } from "~/services/prisma"
 
-const getStats = cache(async () => {
+const getStats = async () => {
   return await prisma.$transaction([
     prisma.tool.count(),
     prisma.alternative.count(),
@@ -11,11 +11,10 @@ const getStats = cache(async () => {
     prisma.topic.count(),
     prisma.license.count(),
   ])
-}, ["stats"])
+}
 
 export const StatsCard = async () => {
   const stats = await getStats()
-
   const statsLabels = {
     0: "Tools",
     1: "Alternatives",
