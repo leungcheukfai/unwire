@@ -9,7 +9,7 @@ import { prisma } from "~/services/prisma"
 
 export const publishTools = inngest.createFunction(
   { id: "publish-tools" },
-  { cron: "TZ=Europe/Warsaw 51 * * * *" }, // Every hour at minute 5
+  { cron: "TZ=Europe/Warsaw 56 * * * *" }, // Every hour at minute 5
   async ({ step, logger }) => {
     const tools = await step.run("fetch-tools", async () => {
       return prisma.tool.findMany({
@@ -24,10 +24,10 @@ export const publishTools = inngest.createFunction(
       logger.info(`Publishing ${tools.length} tools`, { tools })
 
       for (const tool of tools) {
-        await step.run(`post-on-socials-${tool.slug}`, async () => {
-          const template = getPostLaunchTemplate(tool)
-          return sendSocialPost(template, tool)
-        })
+        // await step.run(`post-on-socials-${tool.slug}`, async () => {
+        //   const template = getPostLaunchTemplate(tool)
+        //   return sendSocialPost(template, tool)
+        // })
 
         // Update tool status
         await step.run(`update-tool-status-${tool.slug}`, async () => {
