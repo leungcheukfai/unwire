@@ -4,7 +4,6 @@ import EmailToolScheduled from "~/emails/tool-scheduled"
 import { sendEmails } from "~/lib/email"
 import { generateContent } from "~/lib/generate-content"
 import { uploadFavicon, uploadScreenshot } from "~/lib/media"
-import { getToolRepositoryData } from "~/lib/repositories"
 import { firecrawlClient } from "~/services/firecrawl"
 import { inngest } from "~/services/inngest"
 import { prisma } from "~/services/prisma"
@@ -59,25 +58,25 @@ export const toolScheduled = inngest.createFunction(
       }),
 
 
-      step.run("upload-favicon", async () => {
-        const { id, slug, website } = tool
-        const faviconUrl = await uploadFavicon(website, `tools/${slug}/favicon`)
+      // step.run("upload-favicon", async () => {
+      //   const { id, slug, website } = tool
+      //   const faviconUrl = await uploadFavicon(website, `tools/${slug}/favicon`)
 
-        return prisma.tool.update({
-          where: { id },
-          data: { faviconUrl },
-        })
-      }),
+      //   return prisma.tool.update({
+      //     where: { id },
+      //     data: { faviconUrl },
+      //   })
+      // }),
 
-      step.run("upload-screenshot", async () => {
-        const { id, slug, website } = tool
-        const screenshotUrl = await uploadScreenshot(website, `tools/${slug}/screenshot`)
+      // step.run("upload-screenshot", async () => {
+      //   const { id, slug, website } = tool
+      //   const screenshotUrl = await uploadScreenshot(website, `tools/${slug}/screenshot`)
 
-        return prisma.tool.update({
-          where: { id },
-          data: { screenshotUrl },
-        })
-      }),
+      //   return prisma.tool.update({
+      //     where: { id },
+      //     data: { screenshotUrl },
+      //   })
+      // }),
     ])
 
     // Disconnect from DB
