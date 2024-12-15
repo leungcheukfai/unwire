@@ -58,16 +58,6 @@ export const toolScheduled = inngest.createFunction(
         })
       }),
 
-      step.run("fetch-repository-data", async () => {
-        const data = await getToolRepositoryData(tool)
-
-        if (!data) return
-
-        return prisma.tool.update({
-          where: { id: tool.id },
-          data,
-        })
-      }),
 
       step.run("upload-favicon", async () => {
         const { id, slug, website } = tool

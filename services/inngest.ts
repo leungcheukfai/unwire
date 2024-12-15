@@ -16,5 +16,6 @@ type Events = {
 
 export const inngest = new Inngest({
   id: "openalternative",
+  eventKey:"yFeLgjyr-C3z9YIZHfv9EU45xtmP6VvO5lMjNabPEHVajEpX9sG6T1lJQYS8G-GGY7LcXgKWuI0y_40c89fJfQ",
   schemas: new EventSchemas().fromRecord<Events>(),
 })

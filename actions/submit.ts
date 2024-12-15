@@ -55,9 +55,8 @@ export const submitTool = createServerAction()
 
     // Check if the tool already exists
     const existingTool = await prisma.tool.findFirst({
-      where: { OR: [{ repository: data.repository }, { website: data.website }] },
+      where: { OR: [{ website: data.website }, { name: data.name }] },
     })
-
     // If the tool exists, redirect to the tool or submit page
     if (existingTool) {
       return existingTool

@@ -68,6 +68,7 @@ export function ToolForm({
     },
 
     onError: ({ err }) => {
+      console.error(err)
       toast.error(err.message)
     },
   })
@@ -142,19 +143,6 @@ export function ToolForm({
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="repository"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Repository</FormLabel>
-              <FormControl>
-                <Input type="url" placeholder="https://github.com/posthog/posthog" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
         <FormField
           control={form.control}

@@ -107,11 +107,6 @@ export const ToolActions = ({ tool, row, className, ...props }: ToolActionsProps
             </Link>
           </DropdownMenuItem>
 
-          <DropdownMenuItem asChild>
-            <Link href={tool.repository} target="_blank">
-              Visit repository
-            </Link>
-          </DropdownMenuItem>
 
           <DropdownMenuSeparator />
 

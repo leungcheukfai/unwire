@@ -24,7 +24,6 @@ export const toolOnePayload = Prisma.validator<Prisma.ToolSelect>()({
   name: true,
   slug: true,
   website: true,
-  repository: true,
   tagline: true,
   description: true,
   content: true,

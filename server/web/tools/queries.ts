@@ -1,5 +1,6 @@
 import { getRandomElement } from "@curiousleaf/utils"
 import { type Prisma, type Tool, ToolStatus } from "@prisma/client"
+import { console } from "node:inspector"
 import type { inferParserType } from "nuqs/server"
 import { cache } from "~/lib/cache"
 import {
@@ -23,7 +24,6 @@ export const searchTools = cache(
     // Spliting the sort string by "." to get the column and order
     // Example: "title.desc" => ["title", "desc"]
     const [sortBy, sortOrder] = sort.split(".")
-
     const whereQuery: Prisma.ToolWhereInput = {
       status: ToolStatus.Published,
       ...(category && { categories: { some: { category: { slug: category } } } }),
@@ -38,7 +38,7 @@ export const searchTools = cache(
     const [tools, totalCount] = await prisma.$transaction([
       prisma.tool.findMany({
         ...args,
-        orderBy: sortBy ? { [sortBy]: sortOrder } : [{ isFeatured: "desc" }, { score: "desc" }],
+        orderBy:  { [sortBy]: sortOrder },
         where: { ...whereQuery, ...where },
         select: toolManyPayload,
         take,

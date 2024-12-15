@@ -45,7 +45,6 @@ model Tool {
   name            String     @db.Citext
   slug            String     @unique
   website         String     @unique
-  repository      String     @unique
   tagline         String?
   description     String?
   content         String?
