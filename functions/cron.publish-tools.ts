@@ -9,7 +9,7 @@ import { prisma } from "~/services/prisma"
 
 export const publishTools = inngest.createFunction(
   { id: "publish-tools" },
-  { cron: "TZ=Europe/Warsaw 56 * * * *" }, // Every hour at minute 5
+  { cron: "TZ=Europe/Warsaw 5 * * * *" }, // Every hour at minute 5
   async ({ step, logger }) => {
     const tools = await step.run("fetch-tools", async () => {
       return prisma.tool.findMany({

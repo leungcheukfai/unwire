@@ -11,7 +11,7 @@ import {
 import type { toolsSearchParams } from "~/server/web/tools/search-params"
 import { prisma } from "~/services/prisma"
 
-export const searchTools = cache(
+export const searchTools = 
   async (
     { q, category, page, sort, perPage }: inferParserType<typeof toolsSearchParams>,
     { where, ...args }: Prisma.ToolFindManyArgs,
@@ -51,9 +51,7 @@ export const searchTools = cache(
     ])
 
     return { tools, totalCount }
-  },
-  ["tools"],
-)
+  }
 
 export const findRelatedTools = async ({
   where,
@@ -86,7 +84,7 @@ export const findRelatedTools = async ({
   })
 }
 
-export const findTools = cache(
+export const findTools = 
   async ({ where, orderBy, ...args }: Prisma.ToolFindManyArgs) => {
     return prisma.tool.findMany({
       ...args,
@@ -94,9 +92,7 @@ export const findTools = cache(
       orderBy: orderBy ?? [{ isFeatured: "desc" }, { score: "desc" }],
       select: toolManyPayload,
     })
-  },
-  ["tools"],
-)
+  }
 
 export const findToolsWithCategories = cache(
   async ({ where, ...args }: Prisma.ToolFindManyArgs) => {
