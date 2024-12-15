@@ -31,53 +31,53 @@ export const toolScheduled = inngest.createFunction(
     })
 
     // Run steps in parallel
-    await Promise.all([
-      step.run("generate-content", async () => {
-        const { categories, alternatives, ...content } = await generateContent(scrapedData)
+    // await Promise.all([
+    //   // step.run("generate-content", async () => {
+    //   //   const { categories, alternatives, ...content } = await generateContent(scrapedData)
 
-        return prisma.tool.update({
-          where: { id: tool.id },
-          data: {
-            ...content,
+    //   //   return prisma.tool.update({
+    //   //     where: { id: tool.id },
+    //   //     data: {
+    //   //       ...content,
 
-            categories: {
-              connectOrCreate: categories.map(({ id }) => ({
-                where: { toolId_categoryId: { toolId: tool.id, categoryId: id } },
-                create: { category: { connect: { id } } },
-              })),
-            },
+    //   //       categories: {
+    //   //         connectOrCreate: categories.map(({ id }) => ({
+    //   //           where: { toolId_categoryId: { toolId: tool.id, categoryId: id } },
+    //   //           create: { category: { connect: { id } } },
+    //   //         })),
+    //   //       },
 
-            alternatives: {
-              connectOrCreate: alternatives.map(({ id }) => ({
-                where: { toolId_alternativeId: { toolId: tool.id, alternativeId: id } },
-                create: { alternative: { connect: { id } } },
-              })),
-            },
-          },
-        })
-      }),
+    //   //       alternatives: {
+    //   //         connectOrCreate: alternatives.map(({ id }) => ({
+    //   //           where: { toolId_alternativeId: { toolId: tool.id, alternativeId: id } },
+    //   //           create: { alternative: { connect: { id } } },
+    //   //         })),
+    //   //       },
+    //   //     },
+    //   //   })
+    //   // }),
 
 
-      // step.run("upload-favicon", async () => {
-      //   const { id, slug, website } = tool
-      //   const faviconUrl = await uploadFavicon(website, `tools/${slug}/favicon`)
+    //   // step.run("upload-favicon", async () => {
+    //   //   const { id, slug, website } = tool
+    //   //   const faviconUrl = await uploadFavicon(website, `tools/${slug}/favicon`)
 
-      //   return prisma.tool.update({
-      //     where: { id },
-      //     data: { faviconUrl },
-      //   })
-      // }),
+    //   //   return prisma.tool.update({
+    //   //     where: { id },
+    //   //     data: { faviconUrl },
+    //   //   })
+    //   // }),
 
-      // step.run("upload-screenshot", async () => {
-      //   const { id, slug, website } = tool
-      //   const screenshotUrl = await uploadScreenshot(website, `tools/${slug}/screenshot`)
+    //   // step.run("upload-screenshot", async () => {
+    //   //   const { id, slug, website } = tool
+    //   //   const screenshotUrl = await uploadScreenshot(website, `tools/${slug}/screenshot`)
 
-      //   return prisma.tool.update({
-      //     where: { id },
-      //     data: { screenshotUrl },
-      //   })
-      // }),
-    ])
+    //   //   return prisma.tool.update({
+    //   //     where: { id },
+    //   //     data: { screenshotUrl },
+    //   //   })
+    //   // }),
+    // ])
 
     // Disconnect from DB
     await step.run("disconnect-from-db", async () => {
