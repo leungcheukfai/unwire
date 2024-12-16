@@ -1,7 +1,6 @@
 import { ToolStatus } from "@prisma/client"
 import { revalidateTag } from "next/cache"
 import { getMilestoneReached } from "~/lib/milestones"
-import { getToolRepositoryData } from "~/lib/repositories"
 import { getPostMilestoneTemplate, getPostTemplate, sendSocialPost } from "~/lib/socials"
 import { isToolPublished } from "~/lib/tools"
 import { findRandomTool } from "~/server/web/tools/queries"
@@ -19,32 +18,6 @@ export const fetchTools = inngest.createFunction(
       })
     })
 
-    await step.run("fetch-repository-data", async () => {
-      return Promise.all(
-        tools.map(async tool => {
-          const updatedTool = await getToolRepositoryData(tool)
-          logger.info(`Updated tool data for ${tool.name}`, { updatedTool })
-
-          if (!updatedTool) {
-            return null
-          }
-
-          if (isToolPublished(tool) && updatedTool.stars > tool.stars) {
-            const milestone = getMilestoneReached(tool.stars, updatedTool.stars)
-
-            if (milestone) {
-              const template = getPostMilestoneTemplate(tool, milestone)
-              await sendSocialPost(template, tool)
-            }
-          }
-
-          return prisma.tool.update({
-            where: { id: tool.id },
-            data: updatedTool,
-          })
-        }),
-      )
-    })
 
     // Post on Socials about a random tool
     await step.run("post-on-socials", async () => {
