@@ -36,7 +36,7 @@ export const toolScheduled = inngest.createFunction(
     });
 
     // Run steps in parallel
-    await Promise.all([
+    // await Promise.all([
       step.run("generate-content", async () => {
         const { categories, alternatives, ...content } = await generateContent(
           scrapedData
@@ -86,7 +86,7 @@ export const toolScheduled = inngest.createFunction(
       //   //     data: { screenshotUrl },
       //   //   })
       //   // }),
-    ]);
+    // ]);
 
     // Disconnect from DB
     await step.run("disconnect-from-db", async () => {
