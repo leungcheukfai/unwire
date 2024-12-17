@@ -1,5 +1,5 @@
-import { ToolStatus } from "@prisma/client"
-import * as z from "zod"
+import { ToolStatus } from "@prisma/client";
+import * as z from "zod";
 
 export const searchParamsSchema = z.object({
   name: z.string().optional(),
@@ -12,12 +12,12 @@ export const searchParamsSchema = z.object({
   operator: z
     .enum(["and", "or"])
     .default("and")
-    .transform(val => val.toUpperCase()),
-})
+    .transform((val) => val.toUpperCase()),
+});
 
-export const getToolsSchema = searchParamsSchema
+export const getToolsSchema = searchParamsSchema;
 
-export type GetToolsSchema = z.infer<typeof getToolsSchema>
+export type GetToolsSchema = z.infer<typeof getToolsSchema>;
 
 export const toolSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -39,6 +39,10 @@ export const toolSchema = z.object({
   status: z.nativeEnum(ToolStatus).default("Draft"),
   alternatives: z.array(z.string()).optional(),
   categories: z.array(z.string()).optional(),
-})
+  // New optional fields
+  freeTier: z.boolean().optional(),
+  aiPowered: z.boolean().optional(),
+  chinese: z.boolean().optional(),
+});
 
-export type ToolSchema = z.infer<typeof toolSchema>
+export type ToolSchema = z.infer<typeof toolSchema>;

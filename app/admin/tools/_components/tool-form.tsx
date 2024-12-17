@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { ToolStatus } from "@prisma/client"
-import { formatDate } from "date-fns"
-import Link from "next/link"
-import { redirect } from "next/navigation"
-import type React from "react"
-import { useForm } from "react-hook-form"
-import { toast } from "sonner"
-import { useServerAction } from "zsa-react"
-import { RelationSelector } from "~/components/admin/relation-selector"
-import { Button } from "~/components/admin/ui/button"
-import { Input } from "~/components/admin/ui/input"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ToolStatus } from "@prisma/client";
+import { formatDate } from "date-fns";
+import Link from "next/link";
+import { redirect } from "next/navigation";
+import type React from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { useServerAction } from "zsa-react";
+import { RelationSelector } from "~/components/admin/relation-selector";
+import { Button } from "~/components/admin/ui/button";
+import { Input } from "~/components/admin/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "~/components/admin/ui/select"
-import { Switch } from "~/components/admin/ui/switch"
-import { Textarea } from "~/components/admin/ui/textarea"
+} from "~/components/admin/ui/select";
+import { Switch } from "~/components/admin/ui/switch";
+import { Textarea } from "~/components/admin/ui/textarea";
 import {
   Form,
   FormControl,
@@ -28,20 +28,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "~/components/common/form"
-import type { findAlternativeList } from "~/server/admin/alternatives/queries"
-import type { findCategoryList } from "~/server/admin/categories/queries"
-import { createTool, updateTool } from "~/server/admin/tools/actions"
-import type { findToolBySlug } from "~/server/admin/tools/queries"
-import { type ToolSchema, toolSchema } from "~/server/admin/tools/validations"
-import { cx } from "~/utils/cva"
-import { nullsToUndefined } from "~/utils/helpers"
+} from "~/components/common/form";
+import type { findAlternativeList } from "~/server/admin/alternatives/queries";
+import type { findCategoryList } from "~/server/admin/categories/queries";
+import { createTool, updateTool } from "~/server/admin/tools/actions";
+import type { findToolBySlug } from "~/server/admin/tools/queries";
+import { type ToolSchema, toolSchema } from "~/server/admin/tools/validations";
+import { cx } from "~/utils/cva";
+import { nullsToUndefined } from "~/utils/helpers";
 
 type ToolFormProps = React.HTMLAttributes<HTMLFormElement> & {
-  tool?: Awaited<ReturnType<typeof findToolBySlug>>
-  alternatives: ReturnType<typeof findAlternativeList>
-  categories: ReturnType<typeof findCategoryList>
-}
+  tool?: Awaited<ReturnType<typeof findToolBySlug>>;
+  alternatives: ReturnType<typeof findAlternativeList>;
+  categories: ReturnType<typeof findCategoryList>;
+};
 
 export function ToolForm({
   children,
@@ -55,41 +55,45 @@ export function ToolForm({
     resolver: zodResolver(toolSchema),
     defaultValues: {
       ...nullsToUndefined(tool),
-      alternatives: tool?.alternatives?.map(({ alternative }) => alternative.id),
+      alternatives: tool?.alternatives?.map(
+        ({ alternative }) => alternative.id
+      ),
       categories: tool?.categories?.map(({ category }) => category.id),
     },
-  })
+  });
 
   // Create tool
-  const { execute: createToolAction, isPending: isCreatingTool } = useServerAction(createTool, {
-    onSuccess: ({ data }) => {
-      toast.success("Tool successfully created")
-      redirect(`/admin/tools/${data.slug}`)
-    },
+  const { execute: createToolAction, isPending: isCreatingTool } =
+    useServerAction(createTool, {
+      onSuccess: ({ data }) => {
+        toast.success("Tool successfully created");
+        redirect(`/admin/tools/${data.slug}`);
+      },
 
-    onError: ({ err }) => {
-      console.error(err)
-      toast.error(err.message)
-    },
-  })
+      onError: ({ err }) => {
+        console.error(err);
+        toast.error(err.message);
+      },
+    });
 
   // Update tool
-  const { execute: updateToolAction, isPending: isUpdatingTool } = useServerAction(updateTool, {
-    onSuccess: ({ data }) => {
-      toast.success("Tool successfully updated")
-      redirect(`/admin/tools/${data.slug}`)
-    },
+  const { execute: updateToolAction, isPending: isUpdatingTool } =
+    useServerAction(updateTool, {
+      onSuccess: ({ data }) => {
+        toast.success("Tool successfully updated");
+        redirect(`/admin/tools/${data.slug}`);
+      },
 
-    onError: ({ err }) => {
-      toast.error(err.message)
-    },
-  })
+      onError: ({ err }) => {
+        toast.error(err.message);
+      },
+    });
 
-  const onSubmit = form.handleSubmit(data => {
-    tool ? updateToolAction({ id: tool.id, ...data }) : createToolAction(data)
-  })
+  const onSubmit = form.handleSubmit((data) => {
+    tool ? updateToolAction({ id: tool.id, ...data }) : createToolAction(data);
+  });
 
-  const isPending = isCreatingTool || isUpdatingTool
+  const isPending = isCreatingTool || isUpdatingTool;
 
   return (
     <Form {...form}>
@@ -143,7 +147,6 @@ export function ToolForm({
           )}
         />
 
-
         <FormField
           control={form.control}
           name="tagline"
@@ -151,7 +154,10 @@ export function ToolForm({
             <FormItem>
               <FormLabel>Tagline</FormLabel>
               <FormControl>
-                <Input placeholder="How developers build successful products" {...field} />
+                <Input
+                  placeholder="How developers build successful products"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -197,7 +203,10 @@ export function ToolForm({
               <FormItem className="flex-1">
                 <FormLabel>Featured</FormLabel>
                 <FormControl>
-                  <Switch onCheckedChange={field.onChange} checked={field.value} />
+                  <Switch
+                    onCheckedChange={field.onChange}
+                    checked={field.value}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -217,7 +226,7 @@ export function ToolForm({
                     </SelectTrigger>
 
                     <SelectContent side="top" className="tabular-nums">
-                      {Object.values(ToolStatus).map(status => (
+                      {Object.values(ToolStatus).map((status) => (
                         <SelectItem key={status} value={status}>
                           {status}
                         </SelectItem>
@@ -229,6 +238,8 @@ export function ToolForm({
               </FormItem>
             )}
           />
+
+          {/* New Fields */}
         </div>
 
         <FormField
@@ -241,8 +252,16 @@ export function ToolForm({
                 <Input
                   type="datetime-local"
                   {...field}
-                  value={field.value ? formatDate(field.value, "yyyy-MM-dd HH:mm") : undefined}
-                  onChange={e => field.onChange(e.target.value ? new Date(e.target.value) : null)}
+                  value={
+                    field.value
+                      ? formatDate(field.value, "yyyy-MM-dd HH:mm")
+                      : undefined
+                  }
+                  onChange={(e) =>
+                    field.onChange(
+                      e.target.value ? new Date(e.target.value) : null
+                    )
+                  }
                 />
               </FormControl>
               <FormMessage />
@@ -361,6 +380,56 @@ export function ToolForm({
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="freeTier"
+          render={({ field }) => (
+            <FormItem className="flex-1">
+              <FormLabel>Free Tier</FormLabel>
+              <FormControl>
+                <Switch
+                  onCheckedChange={field.onChange}
+                  checked={field.value}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="aiPowered"
+          render={({ field }) => (
+            <FormItem className="flex-1">
+              <FormLabel>AI-Powered</FormLabel>
+              <FormControl>
+                <Switch
+                  onCheckedChange={field.onChange}
+                  checked={field.value}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="chinese"
+          render={({ field }) => (
+            <FormItem className="flex-1">
+              <FormLabel>Chinese</FormLabel>
+              <FormControl>
+                <Switch
+                  onCheckedChange={field.onChange}
+                  checked={field.value}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormField
           control={form.control}
@@ -403,5 +472,5 @@ export function ToolForm({
         </div>
       </form>
     </Form>
-  )
+  );
 }

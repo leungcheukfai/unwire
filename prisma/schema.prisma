@@ -41,31 +41,30 @@ model Ad {
 }
 
 model Tool {
-  id              String     @id @default(cuid())
-  name            String     @db.Citext
-  slug            String     @unique
-  website         String     @unique
-  tagline         String?
-  description     String?
-  content         String?
-  stars           Int        @default(0)
-  forks           Int        @default(0)
-  score           Int        @default(0)
-  faviconUrl      String?
-  screenshotUrl   String?
-  isFeatured      Boolean    @default(false)
-  submitterName   String?
-  submitterEmail  String?
-  submitterNote   String?
-  hostingUrl      String?
-  discountCode    String?
-  discountAmount  String?
-  firstCommitDate DateTime?
-  lastCommitDate  DateTime?
-  status          ToolStatus @default(Draft)
-  publishedAt     DateTime?
-  createdAt       DateTime   @default(now())
-  updatedAt       DateTime   @updatedAt
+  id             String     @id @default(cuid())
+  name           String     @db.Citext
+  slug           String     @unique
+  website        String     @unique
+  tagline        String?
+  description    String?
+  content        String?
+  freeTier       Boolean    @default(false)
+  aiPowered      Boolean    @default(false)
+  chinese        Boolean    @default(false)
+  score          Int        @default(0)
+  faviconUrl     String?
+  screenshotUrl  String?
+  isFeatured     Boolean    @default(false)
+  submitterName  String?
+  submitterEmail String?
+  submitterNote  String?
+  hostingUrl     String?
+  discountCode   String?
+  discountAmount String?
+  status         ToolStatus @default(Draft)
+  publishedAt    DateTime?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
 
   // Relations
   licenseId    String?
