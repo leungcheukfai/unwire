@@ -12,8 +12,8 @@ import {
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { type HTMLAttributes, Suspense, useEffect, useState } from "react"
-import { BrandBlueskyIcon } from "~/components/common/icons/brand-bluesky"
-import { BrandGitHubIcon } from "~/components/common/icons/brand-github"
+// import { BrandBlueskyIcon } from "~/components/common/icons/brand-bluesky"
+// import { BrandGitHubIcon } from "~/components/common/icons/brand-github"
 import { BrandXIcon } from "~/components/common/icons/brand-x"
 import { Stack } from "~/components/common/stack"
 import { SearchForm } from "~/components/web/search-form"
@@ -29,6 +29,9 @@ import { Logo } from "~/components/web/ui/logo"
 import { NavigationLink, navigationLinkVariants } from "~/components/web/ui/navigation-link"
 import { config } from "~/config"
 import { cx } from "~/utils/cva"
+import { BrandFacebookIcon } from "../common/icons/brand-facebook"
+import { BrandInstagramIcon } from "../common/icons/brand-instagram"
+import { BrandThreadsIcon } from "../common/icons/brand-threads"
 
 export const Header = ({ className, ...props }: HTMLAttributes<HTMLElement>) => {
   const pathname = usePathname()
@@ -146,7 +149,7 @@ export const Header = ({ className, ...props }: HTMLAttributes<HTMLElement>) => 
             rel="nofollow noreferrer"
             title="Follow us on Bluesky"
           >
-            <BrandBlueskyIcon className="size-4" />
+            <BrandThreadsIcon className="size-4" />
           </NavigationLink>
 
           <NavigationLink
@@ -164,7 +167,15 @@ export const Header = ({ className, ...props }: HTMLAttributes<HTMLElement>) => 
             rel="nofollow noreferrer"
             title="View source code"
           >
-            <BrandGitHubIcon className="size-4" />
+            <BrandInstagramIcon className="size-4" />
+          </NavigationLink>
+          <NavigationLink
+            href={config.links.github}
+            target="_blank"
+            rel="nofollow noreferrer"
+            title="View source code"
+          >
+            <BrandFacebookIcon className="size-4" />
           </NavigationLink>
         </Stack>
 

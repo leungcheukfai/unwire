@@ -32,9 +32,11 @@ export const FeaturedTools = async ({ ...props }: ComponentProps<typeof Card>) =
               </Stack>
 
               <Stack size="xs">
-                <StarIcon className="size-3" />
+                {/* <StarIcon className="size-3" /> */}
                 <span className="text-xs text-muted tabular-nums">
-                  {formatNumber(tool.stars, "standard")}
+                  {
+                    tool.freeTier && 'Free Tier'
+                  }
                 </span>
               </Stack>
             </Link>

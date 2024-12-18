@@ -21,7 +21,7 @@ const ToolList = ({ tools, showAd = true, ...props }: ToolListProps) => {
             </Suspense>
           )}
 
-          {/* <ToolCard tool={tool} style={{ order }} /> */}
+          <ToolCard tool={tool} style={{ order }} />
         </Fragment>
       ))}
 

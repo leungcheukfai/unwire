@@ -1,75 +1,75 @@
-import { joinAsSentence } from "@curiousleaf/utils"
-import { ArrowUpRightIcon, HashIcon } from "lucide-react"
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
-import { Suspense, cache } from "react"
-import type { ImageObject } from "schema-dts"
-import { FeaturedTools } from "~/app/(web)/[slug]/featured-tools"
-import { RelatedTools } from "~/app/(web)/[slug]/related-tools"
-import { H1, H5 } from "~/components/common/heading"
-import { Stack } from "~/components/common/stack"
-import { AdCard, AdCardSkeleton } from "~/components/web/ads/ad-card"
-import { ExternalLink } from "~/components/web/external-link"
-import { Listing } from "~/components/web/listing"
-import { Markdown } from "~/components/web/markdown"
-import { RepositoryDetails } from "~/components/web/repository-details"
-import { ShareButtons } from "~/components/web/share-buttons"
-import { ToolBadges } from "~/components/web/tools/tool-badges"
-import { ToolListSkeleton } from "~/components/web/tools/tool-list"
-import { Badge } from "~/components/web/ui/badge"
-import { Button } from "~/components/web/ui/button"
-import { FaviconImage } from "~/components/web/ui/favicon"
-import { IntroDescription } from "~/components/web/ui/intro"
-import { NavigationLink } from "~/components/web/ui/navigation-link"
-import { Section } from "~/components/web/ui/section"
-import { Tag } from "~/components/web/ui/tag"
-import { metadataConfig } from "~/config/metadata"
-import { getToolSuffix } from "~/lib/tools"
-import type { ToolOne } from "~/server/web/tools/payloads"
-import { findToolBySlug, findToolSlugs } from "~/server/web/tools/queries"
+import { joinAsSentence } from "@curiousleaf/utils";
+import { ArrowUpRightIcon, HashIcon } from "lucide-react";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { Suspense, cache } from "react";
+import type { ImageObject } from "schema-dts";
+import { FeaturedTools } from "~/app/(web)/[slug]/featured-tools";
+import { RelatedTools } from "~/app/(web)/[slug]/related-tools";
+import { H1, H5 } from "~/components/common/heading";
+import { Stack } from "~/components/common/stack";
+import { AdCard, AdCardSkeleton } from "~/components/web/ads/ad-card";
+import { ExternalLink } from "~/components/web/external-link";
+import { Listing } from "~/components/web/listing";
+import { Markdown } from "~/components/web/markdown";
+import { RepositoryDetails } from "~/components/web/repository-details";
+import { ShareButtons } from "~/components/web/share-buttons";
+import { ToolBadges } from "~/components/web/tools/tool-badges";
+import { ToolListSkeleton } from "~/components/web/tools/tool-list";
+import { Badge } from "~/components/web/ui/badge";
+import { Button } from "~/components/web/ui/button";
+import { FaviconImage } from "~/components/web/ui/favicon";
+import { IntroDescription } from "~/components/web/ui/intro";
+import { NavigationLink } from "~/components/web/ui/navigation-link";
+import { Section } from "~/components/web/ui/section";
+import { Tag } from "~/components/web/ui/tag";
+import { metadataConfig } from "~/config/metadata";
+import { getToolSuffix } from "~/lib/tools";
+import type { ToolOne } from "~/server/web/tools/payloads";
+import { findToolBySlug, findToolSlugs } from "~/server/web/tools/queries";
 
 type PageProps = {
-  params: Promise<{ slug: string }>
-}
+  params: Promise<{ slug: string }>;
+};
 
 const getTool = cache(async ({ params }: PageProps) => {
-  const { slug } = await params
-  const tool = await findToolBySlug(slug)
+  const { slug } = await params;
+  const tool = await findToolBySlug(slug);
 
   if (!tool) {
-    notFound()
+    notFound();
   }
 
-  return tool
-})
+  return tool;
+});
 
 const getMetadata = (tool: ToolOne): Metadata => {
   return {
     title: `${tool.name}: ${getToolSuffix(tool)}`,
     description: tool.description,
-  }
-}
+  };
+};
 
 export const generateStaticParams = async () => {
-  const tools = await findToolSlugs({})
-  return tools.map(({ slug }) => ({ slug }))
-}
+  const tools = await findToolSlugs({});
+  return tools.map(({ slug }) => ({ slug }));
+};
 
 export const generateMetadata = async (props: PageProps): Promise<Metadata> => {
-  const tool = await getTool(props)
-  const url = `/${tool.slug}`
+  const tool = await getTool(props);
+  const url = `/${tool.slug}`;
 
   return {
     ...getMetadata(tool),
     alternates: { ...metadataConfig.alternates, canonical: url },
     openGraph: { url, type: "website" },
-  }
-}
+  };
+};
 
 export default async function ToolPage(props: PageProps) {
-  const tool = await getTool(props)
-  const { title } = getMetadata(tool)
-  const jsonLd: ImageObject[] = []
+  const tool = await getTool(props);
+  const { title } = getMetadata(tool);
+  const jsonLd: ImageObject[] = [];
 
   if (tool.screenshotUrl) {
     jsonLd.push({
@@ -79,7 +79,7 @@ export default async function ToolPage(props: PageProps) {
       width: "1280",
       height: "720",
       caption: `A screenshot of ${tool.name}`,
-    })
+    });
   }
 
   if (tool.faviconUrl) {
@@ -90,7 +90,7 @@ export default async function ToolPage(props: PageProps) {
       width: "144",
       height: "144",
       caption: `A favicon of ${tool.name}`,
-    })
+    });
   }
 
   return (
@@ -117,14 +117,20 @@ export default async function ToolPage(props: PageProps) {
                 </ToolBadges>
               </Stack>
 
-              {tool.description && <IntroDescription>{tool.description}</IntroDescription>}
+              {tool.description && (
+                <IntroDescription>{tool.description}</IntroDescription>
+              )}
             </div>
 
             {!!tool.alternatives.length && (
               <>
                 <h3 className="sr-only">
                   Open Source Alternative to{" "}
-                  {joinAsSentence(tool.alternatives.map(({ alternative }) => alternative?.name))}
+                  {joinAsSentence(
+                    tool.alternatives.map(
+                      ({ alternative }) => alternative?.name
+                    )
+                  )}
                 </h3>
 
                 <Stack>
@@ -163,7 +169,11 @@ export default async function ToolPage(props: PageProps) {
               )}
 
               {tool.hostingUrl && (
-                <Button variant="secondary" suffix={<ArrowUpRightIcon />} asChild>
+                <Button
+                  variant="secondary"
+                  suffix={<ArrowUpRightIcon />}
+                  asChild
+                >
                   <ExternalLink
                     href={tool.hostingUrl}
                     eventName="click_ad"
@@ -188,11 +198,17 @@ export default async function ToolPage(props: PageProps) {
             />
           )}
 
-          {tool.content && <Markdown code={tool.content} className="max-md:order-5" />}
+          {tool.content && (
+            <Markdown code={tool.content} className="max-md:order-5" />
+          )}
 
           {/* Categories */}
           {!!tool.categories.length && (
-            <Stack size="lg" direction="column" className="w-full max-md:order-6">
+            <Stack
+              size="lg"
+              direction="column"
+              className="w-full max-md:order-6"
+            >
               <H5 as="strong">Categories:</H5>
 
               <Stack>
@@ -211,12 +227,20 @@ export default async function ToolPage(props: PageProps) {
 
           {/* Topics */}
           {!!tool.topics.length && (
-            <Stack size="lg" direction="column" className="w-full max-md:order-7">
+            <Stack
+              size="lg"
+              direction="column"
+              className="w-full max-md:order-7"
+            >
               <H5 as="strong">Related topics:</H5>
 
               <Stack>
                 {tool.topics.map(({ topic }) => (
-                  <Tag key={topic.slug} href={`/topics/${topic.slug}`} prefix={<HashIcon />}>
+                  <Tag
+                    key={topic.slug}
+                    href={`/topics/${topic.slug}`}
+                    prefix={<HashIcon />}
+                  >
                     {topic.slug}
                   </Tag>
                 ))}
@@ -228,7 +252,7 @@ export default async function ToolPage(props: PageProps) {
         </Section.Content>
 
         <Section.Sidebar className="max-md:contents">
-          <RepositoryDetails tool={tool} className="max-md:order-3" />
+          {/* <RepositoryDetails tool={tool} className="max-md:order-3" /> */}
 
           {/* Advertisement */}
           <Suspense fallback={<AdCardSkeleton className="max-md:order-4" />}>
@@ -259,5 +283,5 @@ export default async function ToolPage(props: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
     </div>
-  )
+  );
 }

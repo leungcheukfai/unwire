@@ -1,38 +1,39 @@
-import { formatNumber } from "@curiousleaf/utils"
-import { formatDistanceToNowStrict } from "date-fns"
-import { GitForkIcon, StarIcon, TimerIcon } from "lucide-react"
-import Link from "next/link"
-import type { ComponentProps } from "react"
-import { H4 } from "~/components/common/heading"
-import { Skeleton } from "~/components/common/skeleton"
-import { Stack } from "~/components/common/stack"
-import { ToolBadges } from "~/components/web/tools/tool-badges"
-import { Badge } from "~/components/web/ui/badge"
-import { Card, CardDescription, CardHeader } from "~/components/web/ui/card"
-import { Favicon } from "~/components/web/ui/favicon"
-import { Insights } from "~/components/web/ui/insights"
-import type { ToolMany } from "~/server/web/tools/payloads"
+import { formatNumber } from "@curiousleaf/utils";
+import { formatDistanceToNowStrict } from "date-fns";
+import { GitForkIcon, StarIcon, TimerIcon } from "lucide-react";
+import Link from "next/link";
+import type { ComponentProps } from "react";
+import { H4 } from "~/components/common/heading";
+import { Skeleton } from "~/components/common/skeleton";
+import { Stack } from "~/components/common/stack";
+import { ToolBadges } from "~/components/web/tools/tool-badges";
+import { Badge } from "~/components/web/ui/badge";
+import { Card, CardDescription, CardHeader } from "~/components/web/ui/card";
+import { Favicon } from "~/components/web/ui/favicon";
+import { Insights } from "~/components/web/ui/insights";
+import type { ToolMany } from "~/server/web/tools/payloads";
 
 type ToolCardProps = ComponentProps<typeof Card> & {
-  tool: ToolMany
+  tool: ToolMany;
 
   /**
    * Disables the view transition.
    */
-  isRelated?: boolean
-}
+  isRelated?: boolean;
+};
 
 const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
   const insights = [
-    { label: "Stars", value: formatNumber(tool.stars, "standard"), icon: <StarIcon /> },
-    { label: "Forks", value: formatNumber(tool.forks, "standard"), icon: <GitForkIcon /> },
+    { label: "Free Tier", value: tool.freeTier },
     {
-      label: "Last commit",
-      value:
-        tool.lastCommitDate && formatDistanceToNowStrict(tool.lastCommitDate, { addSuffix: true }),
-      icon: <TimerIcon />,
+      label: "Chinese",
+      value: tool.chinese
     },
-  ]
+    {
+      label: "Ai Powered ",
+      value: tool.aiPowered
+    },
+  ];
 
   return (
     <Card asChild {...props}>
@@ -45,7 +46,9 @@ const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
           </H4>
 
           <ToolBadges tool={tool} size="sm" className="ml-auto text-base">
-            {tool.discountAmount && <Badge variant="success">Get {tool.discountAmount}!</Badge>}
+            {tool.discountAmount && (
+              <Badge variant="success">Get {tool.discountAmount}!</Badge>
+            )}
           </ToolBadges>
         </CardHeader>
 
@@ -54,15 +57,10 @@ const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
         <Insights insights={insights} className="mt-auto" />
       </Link>
     </Card>
-  )
-}
+  );
+};
 
 const ToolCardSkeleton = () => {
-  const insights = [
-    { label: "Stars", value: <Skeleton className="h-4 w-16" />, icon: <StarIcon /> },
-    { label: "Forks", value: <Skeleton className="h-4 w-14" />, icon: <GitForkIcon /> },
-    { label: "Last commit", value: <Skeleton className="h-4 w-20" />, icon: <TimerIcon /> },
-  ]
 
   return (
     <Card hover={false} className="items-stretch select-none">
@@ -79,11 +77,8 @@ const ToolCardSkeleton = () => {
         <Skeleton className="h-5 w-1/2">&nbsp;</Skeleton>
       </CardDescription>
 
-      <Stack size="sm">
-        <Insights insights={insights} className="mt-auto animate-pulse" />
-      </Stack>
     </Card>
-  )
-}
+  );
+};
 
-export { ToolCard, ToolCardSkeleton }
+export { ToolCard, ToolCardSkeleton };

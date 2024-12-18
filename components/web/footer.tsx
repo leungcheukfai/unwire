@@ -3,8 +3,8 @@ import { AtSignIcon, RssIcon } from "lucide-react"
 import Link from "next/link"
 import type { HTMLAttributes } from "react"
 import { H5, H6 } from "~/components/common/heading"
-import { BrandBlueskyIcon } from "~/components/common/icons/brand-bluesky"
-import { BrandGitHubIcon } from "~/components/common/icons/brand-github"
+// import { BrandBlueskyIcon } from "~/components/common/icons/brand-bluesky"
+// import { BrandGitHubIcon } from "~/components/common/icons/brand-github"
 import { BrandLinkedInIcon } from "~/components/common/icons/brand-linkedin"
 import { BrandXIcon } from "~/components/common/icons/brand-x"
 import { Stack } from "~/components/common/stack"
@@ -21,6 +21,9 @@ import { Tooltip, TooltipProvider } from "~/components/web/ui/tooltip"
 import { config } from "~/config"
 import { cx } from "~/utils/cva"
 import { updateUrlWithSearchParams } from "~/utils/queryString"
+import { BrandFacebookIcon } from "../common/icons/brand-facebook"
+import { BrandInstagramIcon } from "../common/icons/brand-instagram"
+import { BrandThreadsIcon } from "../common/icons/brand-threads"
 
 type FooterProps = HTMLAttributes<HTMLElement> & {
   hideNewsletter?: boolean
@@ -110,7 +113,7 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
                   target="_blank"
                   rel="nofollow noreferrer"
                 >
-                  <BrandBlueskyIcon className="size-[1.44em] stroke-[1.25]" />
+                  <BrandInstagramIcon className="size-[1.44em] stroke-[1.25]" />
                 </NavigationLink>
               </Tooltip>
 
@@ -130,7 +133,16 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
                   target="_blank"
                   rel="nofollow noreferrer"
                 >
-                  <BrandGitHubIcon className="size-[1.44em] stroke-[1.25]" />
+                  <BrandFacebookIcon className="size-[1.44em] stroke-[1.25]" />
+                </NavigationLink>
+              </Tooltip>
+              <Tooltip tooltip="View source code">
+                <NavigationLink
+                  href={config.links.github}
+                  target="_blank"
+                  rel="nofollow noreferrer"
+                >
+                  <BrandThreadsIcon className="size-[1.44em] stroke-[1.25]" />
                 </NavigationLink>
               </Tooltip>
             </TooltipProvider>

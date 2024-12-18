@@ -3,7 +3,7 @@ import { cache } from "~/lib/cache"
 import { categoryManyPayload, categoryOnePayload } from "~/server/web/categories/payloads"
 import { prisma } from "~/services/prisma"
 
-export const findCategories = cache(
+export const findCategories =
   async ({ where, orderBy, ...args }: Prisma.CategoryFindManyArgs) => {
     return prisma.category.findMany({
       ...args,
@@ -11,9 +11,7 @@ export const findCategories = cache(
       where: { tools: { some: { tool: { status: ToolStatus.Published } } }, ...where },
       select: categoryManyPayload,
     })
-  },
-  ["categories"],
-)
+  }
 
 export const findCategorySlugs = async ({
   where,

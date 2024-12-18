@@ -67,15 +67,15 @@ export const toolScheduled = inngest.createFunction(
           },
         });
       }),
-      //   // step.run("upload-favicon", async () => {
-      //   //   const { id, slug, website } = tool
-      //   //   const faviconUrl = await uploadFavicon(website, `tools/${slug}/favicon`)
+        step.run("upload-favicon", async () => {
+          const { id, slug, website } = tool
+          const faviconUrl = await uploadFavicon(website, `tools/${slug}/favicon`)
 
-      //   //   return prisma.tool.update({
-      //   //     where: { id },
-      //   //     data: { faviconUrl },
-      //   //   })
-      //   // }),
+          return prisma.tool.update({
+            where: { id },
+            data: { faviconUrl },
+          })
+        }),
 
       //   // step.run("upload-screenshot", async () => {
       //   //   const { id, slug, website } = tool

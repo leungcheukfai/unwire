@@ -1,4 +1,3 @@
-import { console } from "node:inspector"
 import type { SearchParams } from "nuqs/server"
 import { ToolQuery } from "~/components/web/tools/tool-query"
 import { findCategories } from "~/server/web/categories/queries"
@@ -15,7 +14,6 @@ export const HomeToolListing = async ({ searchParams }: HomeToolListingProps) =>
     searchTools(parsedParams, {}),
     findCategories({}),
   ])
-
   return (
     <ToolQuery
       tools={tools}
