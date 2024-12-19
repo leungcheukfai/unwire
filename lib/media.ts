@@ -107,7 +107,6 @@ export const uploadScreenshot = async (
   url: string,
   s3Key: string
 ): Promise<string> => {
-  // Validate inputs
   if (!url) throw new Error("URL is required");
   if (!s3Key) throw new Error("S3 key is required");
   if (!env.SCREENSHOTONE_ACCESS_KEY)
@@ -118,9 +117,9 @@ export const uploadScreenshot = async (
     access_key: env.SCREENSHOTONE_ACCESS_KEY,
     response_type: "json",
 
-    // Cache settings - reduced cache time for testing
+    // Cache settings - minimum 14400 seconds (4 hours)
     cache: "true",
-    cache_ttl: "3600", // Reduced to 1 hour for testing
+    cache_ttl: "14400", // Updated this value to meet minimum requirement
 
     // Core settings
     format: "webp",
@@ -142,29 +141,13 @@ export const uploadScreenshot = async (
 
   try {
     const endpointUrl = `https://api.screenshotone.com/take?${queryParams.toString()}`;
-    console.log(
-      "Requesting URL:",
-      endpointUrl.replace(env.SCREENSHOTONE_ACCESS_KEY, "[REDACTED]")
-    ); // For debugging
+    const { store } = await wretch(endpointUrl)
+      .get()
+      .json<{ store: { location: string } }>();
 
-    const response = await wretch(endpointUrl).get().res(); // Get full response first
-
-    // Log response status and headers for debugging
-    console.log("Response status:", response.status);
-
-    const data = await response.json();
-
-    if (!data.store?.location) {
-      throw new Error(`Invalid response format: ${JSON.stringify(data)}`);
-    }
-
-    return data.store.location;
-  } catch (error: any) {
-    console.error("Error details:", {
-      message: error.message,
-      status: error.status,
-      response: error.response,
-    });
-    throw new Error(`Screenshot failed: ${error.message}`);
+    return store.location;
+  } catch (error) {
+    console.error("Error details:", error);
+    throw new Error(`Screenshot failed: ${JSON.stringify(error)}`);
   }
 };
