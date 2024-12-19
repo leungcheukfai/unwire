@@ -106,6 +106,9 @@ export const uploadFavicon = async (
 /**
  * Uploads a screenshot of a given URL to an S3 bucket using ScreenshotOne API.
  *
+/**
+ * Uploads a screenshot of a given URL to an S3 bucket using ScreenshotOne API.
+ *
  * @param {string} url - The URL of the webpage to capture.
  * @param {string} s3Key - The key (path) to store the screenshot in S3.
  * @returns {Promise<string>} - The location of the stored screenshot.
@@ -114,60 +117,29 @@ export const uploadScreenshot = async (
   url: string,
   s3Key: string
 ): Promise<string> => {
-  const queryParams = new URLSearchParams({
-    url,
-    access_key: env.SCREENSHOTONE_ACCESS_KEY || "",
-    response_type: "json",
-
-    // Cache settings
-    cache: "true",
-    cache_ttl: "2592000", // 30 days in seconds
-
-    // Emulations
-    dark_mode: "true",
-    reduced_motion: "true",
-
-    // Blocking options
-    delay: "3",
-    block_ads: "true",
-    block_chats: "true",
-    block_trackers: "true",
-    block_cookie_banners: "true",
-
-    // Image and viewport options
-    format: "webp",
-    viewport_width: "1280",
-    viewport_height: "720",
-
-    // Storage settings
-    store: "true",
-    storage_path: s3Key,
-    storage_bucket: env.S3_BUCKET || "",
-    storage_access_key_id: env.S3_ACCESS_KEY || "",
-    storage_secret_access_key: env.S3_SECRET_ACCESS_KEY || "",
-    storage_return_location: "true",
-  });
-
-  const endpointUrl = `https://api.screenshotone.com/take?${queryParams.toString()}`;
+  // Construct the ScreenshotOne API URL
+  const screenshotOneApiUrl = `https://api.screenshotone.com/take?url=${encodeURIComponent(
+    url
+  )}&full_page=true&format=png&key=${env.SCREENSHOTONE_ACCESS_KEY}`;
 
   try {
-    const response = await wretch(endpointUrl)
+    // Fetch the screenshot from ScreenshotOne API
+    const arrayBuffer = await wretch(screenshotOneApiUrl)
       .get()
-      .json<{ store: { location: string } }>();
+      .badRequest((err) => {
+        throw new Error(`Failed to fetch screenshot: ${err.message}`);
+      })
+      .arrayBuffer();
 
-    if (!response?.store?.location) {
-      throw new Error(
-        "Failed to retrieve the screenshot location from the API response."
-      );
-    }
+    // Convert response to Buffer
+    const buffer = Buffer.from(arrayBuffer);
 
-    return response.store.location;
-  } catch (error: any) {
-    const errorMessage = error?.message || "Unknown error occurred";
+    // Upload to S3
+    const s3Location = await uploadToS3Storage(buffer, `${s3Key}.png`);
 
-    console.error("Error uploading screenshot:", errorMessage);
-    console.error("Endpoint URL:", endpointUrl);
-
-    throw new Error(`Screenshot upload failed: ${errorMessage}`);
+    return s3Location;
+  } catch (error) {
+    console.error("Error fetching or uploading screenshot:", error);
+    throw error;
   }
 };
