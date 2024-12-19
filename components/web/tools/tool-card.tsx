@@ -27,11 +27,11 @@ const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
     { label: "Free Tier", value: tool.freeTier },
     {
       label: "Chinese",
-      value: tool.chinese
+      value: tool.chinese,
     },
     {
       label: "Ai Powered ",
-      value: tool.aiPowered
+      value: tool.aiPowered,
     },
   ];
 
@@ -54,14 +54,17 @@ const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
 
         {tool.tagline && <CardDescription>{tool.tagline}</CardDescription>}
 
-        <Insights insights={insights} className="mt-auto" />
+        {/* <Insights insights={insights} className="mt-auto" /> */}
+        <p className=" text-xs text-gray-500">
+          {" "}
+          <span className="text-green-500">$</span> free + from $29/mo
+        </p>
       </Link>
     </Card>
   );
 };
 
 const ToolCardSkeleton = () => {
-
   return (
     <Card hover={false} className="items-stretch select-none">
       <CardHeader>
@@ -76,7 +79,6 @@ const ToolCardSkeleton = () => {
         <Skeleton className="h-5 w-4/5">&nbsp;</Skeleton>
         <Skeleton className="h-5 w-1/2">&nbsp;</Skeleton>
       </CardDescription>
-
     </Card>
   );
 };

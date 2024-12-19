@@ -19,6 +19,7 @@ import { ToolListSkeleton } from "~/components/web/tools/tool-list";
 import { Badge } from "~/components/web/ui/badge";
 import { Button } from "~/components/web/ui/button";
 import { FaviconImage } from "~/components/web/ui/favicon";
+import { Insights } from "~/components/web/ui/insights";
 import { IntroDescription } from "~/components/web/ui/intro";
 import { NavigationLink } from "~/components/web/ui/navigation-link";
 import { Section } from "~/components/web/ui/section";
@@ -92,6 +93,17 @@ export default async function ToolPage(props: PageProps) {
       caption: `A favicon of ${tool.name}`,
     });
   }
+  const insights = [
+    { label: "Free Tier", value: tool.freeTier },
+    {
+      label: "Chinese",
+      value: tool.chinese,
+    },
+    {
+      label: "Ai Powered ",
+      value: tool.aiPowered,
+    },
+  ];
 
   return (
     <div className="flex flex-col gap-12">
@@ -183,6 +195,9 @@ export default async function ToolPage(props: PageProps) {
                   </ExternalLink>
                 </Button>
               )}
+            </Stack>
+            <Stack size="sm">
+              <Insights insights={insights} className="mt-auto" />
             </Stack>
           </div>
 
