@@ -96,6 +96,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         data-api={`${env.NEXT_PUBLIC_PLAUSIBLE_HOST}/api/event`}
         src={`${env.NEXT_PUBLIC_PLAUSIBLE_HOST}/js/script.js`}
       />
+      
     </Providers>
   )
 }

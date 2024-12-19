@@ -26,6 +26,7 @@
     "@curiousleaf/utils": "^1.0.38",
     "@hookform/resolvers": "^3.9.1",
     "@mendable/firecrawl-js": "^1.9.1",
+    "@next/third-parties": "^15.1.1",
     "@number-flow/react": "^0.3.5",
     "@octokit/graphql": "^8.1.1",
     "@prisma/client": "^6",
