@@ -102,44 +102,69 @@ export const uploadFavicon = async (
  * @param s3Key - The S3 key to upload the screenshot to.
  * @returns The S3 location of the uploaded screenshot.
  */
-
-/**
- * Uploads a screenshot of a given URL to an S3 bucket using ScreenshotOne API.
- *
-/**
- * Uploads a screenshot of a given URL to an S3 bucket using ScreenshotOne API.
- *
- * @param {string} url - The URL of the webpage to capture.
- * @param {string} s3Key - The key (path) to store the screenshot in S3.
- * @returns {Promise<string>} - The location of the stored screenshot.
- */
+// Modified version with error handling and validation
 export const uploadScreenshot = async (
   url: string,
   s3Key: string
 ): Promise<string> => {
-  // Construct the ScreenshotOne API URL
-  const screenshotOneApiUrl = `https://api.screenshotone.com/take?url=${encodeURIComponent(
-    url
-  )}&full_page=true&format=png&key=${env.SCREENSHOTONE_ACCESS_KEY}`;
+  // Validate inputs
+  if (!url) throw new Error("URL is required");
+  if (!s3Key) throw new Error("S3 key is required");
+  if (!env.SCREENSHOTONE_ACCESS_KEY)
+    throw new Error("SCREENSHOTONE_ACCESS_KEY is required");
+
+  const queryParams = new URLSearchParams({
+    url,
+    access_key: env.SCREENSHOTONE_ACCESS_KEY,
+    response_type: "json",
+
+    // Cache settings - reduced cache time for testing
+    cache: "true",
+    cache_ttl: "3600", // Reduced to 1 hour for testing
+
+    // Core settings
+    format: "webp",
+    viewport_width: "1280",
+    viewport_height: "720",
+
+    // Reduced number of options for initial testing
+    block_ads: "true",
+    delay: "2",
+
+    // S3 storage options
+    store: "true",
+    storage_path: s3Key,
+    storage_bucket: env.S3_BUCKET,
+    storage_access_key_id: env.S3_ACCESS_KEY,
+    storage_secret_access_key: env.S3_SECRET_ACCESS_KEY,
+    storage_return_location: "true",
+  });
 
   try {
-    // Fetch the screenshot from ScreenshotOne API
-    const arrayBuffer = await wretch(screenshotOneApiUrl)
-      .get()
-      .badRequest((err) => {
-        throw new Error(`Failed to fetch screenshot: ${err.message}`);
-      })
-      .arrayBuffer();
+    const endpointUrl = `https://api.screenshotone.com/take?${queryParams.toString()}`;
+    console.log(
+      "Requesting URL:",
+      endpointUrl.replace(env.SCREENSHOTONE_ACCESS_KEY, "[REDACTED]")
+    ); // For debugging
 
-    // Convert response to Buffer
-    const buffer = Buffer.from(arrayBuffer);
+    const response = await wretch(endpointUrl).get().res(); // Get full response first
 
-    // Upload to S3
-    const s3Location = await uploadToS3Storage(buffer, `${s3Key}.png`);
+    // Log response status and headers for debugging
+    console.log("Response status:", response.status);
 
-    return s3Location;
-  } catch (error) {
-    console.error("Error fetching or uploading screenshot:", error);
-    throw error;
+    const data = await response.json();
+
+    if (!data.store?.location) {
+      throw new Error(`Invalid response format: ${JSON.stringify(data)}`);
+    }
+
+    return data.store.location;
+  } catch (error: any) {
+    console.error("Error details:", {
+      message: error.message,
+      status: error.status,
+      response: error.response,
+    });
+    throw new Error(`Screenshot failed: ${error.message}`);
   }
 };
