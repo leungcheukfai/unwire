@@ -117,18 +117,28 @@ export const uploadScreenshot = async (
     access_key: env.SCREENSHOTONE_ACCESS_KEY,
     response_type: "json",
 
-    // Cache settings - minimum 14400 seconds (4 hours)
+    // Cache settings
     cache: "true",
-    cache_ttl: "14400", // Updated this value to meet minimum requirement
+    cache_ttl: "14400",
 
-    // Core settings
+    // Enhanced waiting strategy for dynamic content
+    delay: "5", // Increased delay to 5 seconds
+    wait_until: "networkidle0", // Wait until network is idle
+    timeout: "30", // 30 second timeout
+
+    // Viewport and quality settings
     format: "webp",
     viewport_width: "1280",
     viewport_height: "720",
+    device_scale_factor: "1",
+    quality: "100",
 
-    // Reduced number of options for initial testing
+    // Better handling of modern web features
     block_ads: "true",
-    delay: "2",
+    block_trackers: "true",
+    block_cookies: "true",
+    fail_on_page_error: "false", // Don't fail on JS errors
+    scroll_to_bottom: "true", // Ensure full page load
 
     // S3 storage options
     store: "true",
@@ -136,18 +146,42 @@ export const uploadScreenshot = async (
     storage_bucket: env.S3_BUCKET,
     storage_access_key_id: env.S3_ACCESS_KEY,
     storage_secret_access_key: env.S3_SECRET_ACCESS_KEY,
+    storage_region: "us-east-1", // Added explicit region
     storage_return_location: "true",
   });
 
   try {
     const endpointUrl = `https://api.screenshotone.com/take?${queryParams.toString()}`;
-    const { store } = await wretch(endpointUrl)
-      .get()
-      .json<{ store: { location: string } }>();
 
-    return store.location;
-  } catch (error) {
-    console.error("Error details:", error);
-    throw new Error(`Screenshot failed: ${JSON.stringify(error)}`);
+    // Add retries for resilience
+    let attempts = 0;
+    const maxAttempts = 3;
+
+    while (attempts < maxAttempts) {
+      try {
+        const response = await wretch(endpointUrl)
+          .get()
+          .json<{ store: { location: string } }>();
+
+        if (response.store?.location) {
+          return response.store.location;
+        }
+        throw new Error("Invalid response format");
+      } catch (err) {
+        attempts++;
+        if (attempts === maxAttempts) throw err;
+        // Wait 2 seconds before retry
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
+    }
+
+    throw new Error("Max retry attempts reached");
+  } catch (error: any) {
+    console.error("Screenshot error:", {
+      message: error.message,
+      status: error?.status,
+      response: error?.response,
+    });
+    throw error;
   }
 };
