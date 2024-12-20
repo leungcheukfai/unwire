@@ -1,53 +1,53 @@
-"use client"
+"use client";
 
-import { LoaderIcon, SearchIcon } from "lucide-react"
-import { type Values, useQueryStates } from "nuqs"
-import { useEffect, useState, useTransition } from "react"
-import { Stack } from "~/components/common/stack"
-import { Input } from "~/components/web/ui/input"
-import { Select } from "~/components/web/ui/select"
-import { useDebounce } from "~/hooks/use-debounce"
-import type { CategoryMany } from "~/server/web/categories/payloads"
-import { toolsSearchParams } from "~/server/web/tools/search-params"
+import { LoaderIcon, SearchIcon } from "lucide-react";
+import { type Values, useQueryStates } from "nuqs";
+import { useEffect, useState, useTransition } from "react";
+import { Stack } from "~/components/common/stack";
+import { Input } from "~/components/web/ui/input";
+import { Select } from "~/components/web/ui/select";
+import { useDebounce } from "~/hooks/use-debounce";
+import type { CategoryMany } from "~/server/web/categories/payloads";
+import { toolsSearchParams } from "~/server/web/tools/search-params";
 
 export type ToolFiltersProps = {
-  categories?: CategoryMany[]
-  placeholder?: string
-}
+  categories?: CategoryMany[];
+  placeholder?: string;
+};
 
 export const ToolFilters = ({ categories, placeholder }: ToolFiltersProps) => {
-  const [isLoading, startTransition] = useTransition()
+  const [isLoading, startTransition] = useTransition();
   const [filters, setFilters] = useQueryStates(toolsSearchParams, {
     shallow: false,
     startTransition,
-  })
-  const [inputValue, setInputValue] = useState(filters.q || "")
-  const q = useDebounce(inputValue, 300)
+  });
+  const [inputValue, setInputValue] = useState(filters.q || "");
+  const q = useDebounce(inputValue, 300);
 
   const updateFilters = (values: Partial<Values<typeof toolsSearchParams>>) => {
-    setFilters({ ...values, page: null })
-  }
+    setFilters({ ...values, page: null });
+  };
 
   useEffect(() => {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
       q: q || null,
       page: q && q !== prev.q ? null : prev.page,
-    }))
-  }, [q])
+    }));
+  }, [q]);
 
   useEffect(() => {
-    setInputValue(filters.q || "")
-  }, [filters])
+    setInputValue(filters.q || "");
+  }, [filters]);
 
   const sortOptions = [
     { value: "publishedAt.desc", label: "Latest" },
     { value: "name.asc", label: "Name A-Z" },
     { value: "name.desc", label: "Name Z-A" },
-    { value: "stars.desc", label: "Stars" },
-    { value: "forks.desc", label: "Forks" },
-    { value: "lastCommitDate.desc", label: "Last Commit" },
-  ]
+    { value: "freeTier.desc", label: "Free Tier" },
+    { value: "aiPowered.desc", label: "Ai Powered" },
+    { value: "chinese.desc", label: "Chinese" },
+  ];
 
   return (
     <Stack className="w-full">
@@ -59,7 +59,7 @@ export const ToolFilters = ({ categories, placeholder }: ToolFiltersProps) => {
         <Input
           size="lg"
           value={inputValue}
-          onChange={e => setInputValue(e.target.value)}
+          onChange={(e) => setInputValue(e.target.value)}
           placeholder={placeholder || "Search tools..."}
           className="w-full truncate pl-10"
         />
@@ -70,11 +70,11 @@ export const ToolFilters = ({ categories, placeholder }: ToolFiltersProps) => {
           size="lg"
           className="min-w-40 max-sm:flex-1"
           value={filters.category}
-          onChange={e => updateFilters({ category: e.target.value })}
+          onChange={(e) => updateFilters({ category: e.target.value })}
         >
           <option value="">All categories</option>
 
-          {categories.map(category => (
+          {categories.map((category) => (
             <option key={category.slug} value={category.slug}>
               {category.name}
             </option>
@@ -86,16 +86,16 @@ export const ToolFilters = ({ categories, placeholder }: ToolFiltersProps) => {
         size="lg"
         className="min-w-36 max-sm:flex-1"
         value={filters.sort}
-        onChange={e => updateFilters({ sort: e.target.value })}
+        onChange={(e) => updateFilters({ sort: e.target.value })}
       >
         <option value="">Order by</option>
 
-        {sortOptions.map(option => (
+        {sortOptions.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
       </Select>
     </Stack>
-  )
-}
+  );
+};

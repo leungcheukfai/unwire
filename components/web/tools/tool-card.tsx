@@ -1,6 +1,6 @@
-import { formatNumber } from "@curiousleaf/utils";
-import { formatDistanceToNowStrict } from "date-fns";
-import { GitForkIcon, StarIcon, TimerIcon } from "lucide-react";
+// import { formatNumber } from "@curiousleaf/utils";
+// import { formatDistanceToNowStrict } from "date-fns";
+// import { GitForkIcon, StarIcon, TimerIcon } from "lucide-react";
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import { H4 } from "~/components/common/heading";
@@ -36,7 +36,7 @@ const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
   ];
 
   return (
-    <Card asChild {...props}>
+    <Card asChild {...props} className="min-h-[200px]">
       <Link href={`/${tool.slug}`} prefetch={false}>
         <CardHeader>
           <Favicon src={tool.faviconUrl} title={tool.name} />
