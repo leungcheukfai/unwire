@@ -36,7 +36,10 @@ export const toolSchema = z.object({
   discountCode: z.string().optional(),
   discountAmount: z.string().optional(),
   price: z.string().optional(),
-  publishedAt: z.date().nullish(),
+  publishedAt: z.preprocess(
+    (value) => (typeof value === "string" ? new Date(value) : value),
+    z.date().nullish()
+  ),
   status: z.nativeEnum(ToolStatus).default("Draft"),
   alternatives: z.array(z.string()).optional(),
   categories: z.array(z.string()).optional(),

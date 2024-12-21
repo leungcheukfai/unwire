@@ -37,7 +37,7 @@ const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
 
   return (
     <Card asChild {...props} className="min-h-[200px]">
-      <Link href={`/${tool.slug}`} prefetch={false}>
+      <Link href={`/${tool.slug}`} prefetch={false} className="!pt-6">
         <CardHeader>
           <Favicon src={tool.faviconUrl} title={tool.name} />
 
@@ -55,9 +55,9 @@ const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
         {tool.tagline && <CardDescription>{tool.tagline}</CardDescription>}
 
         {/* <Insights insights={insights} className="mt-auto" /> */}
-        <p className=" text-xs text-gray-500">
+        <p className=" text-xs text-gray-500 pt-10">
           {" "}
-          <span className="text-green-500">$</span> free + from $29/mo
+          <span className="text-green-500">$</span> free + from ${tool.price}/mo
         </p>
       </Link>
     </Card>

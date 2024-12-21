@@ -61,6 +61,7 @@ export const toolManyPayload = Prisma.validator<Prisma.ToolSelect>()({
   isFeatured: true,
   chinese: true,
   freeTier: true,
+  price: true,
   discountAmount: true,
   publishedAt: true,
   updatedAt: true,

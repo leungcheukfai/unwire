@@ -75,7 +75,7 @@ export function ToolForm({
         toast.error(err.message);
       },
     });
-
+console.log(tool);
   // Update tool
   const { execute: updateToolAction, isPending: isUpdatingTool } =
     useServerAction(updateTool, {
@@ -86,6 +86,7 @@ export function ToolForm({
 
       onError: ({ err }) => {
         toast.error(err.message);
+        console.error(err);
       },
     });
 

@@ -78,7 +78,7 @@ export const NewsletterForm = ({
             <Button
               isPending={isPending}
               disabled={isPending}
-              className={cx("shrink-0 ", size === "lg" ? "text-sm/tight px-4 m-1" : "px-3 m-0.5")}
+              className={cx("shrink-0 bg-green-500 text-black ", size === "lg" ? "text-sm/tight px-4 m-1" : "px-3 m-0.5 ")}
               {...buttonProps}
             />
           </div>

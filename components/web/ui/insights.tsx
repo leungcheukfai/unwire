@@ -13,11 +13,20 @@ type InsightsProps = HTMLAttributes<HTMLElement> & {
     label: string;
     value: ReactNode;
   }[];
+  toolPrice: string;
 };
 
-export const Insights = ({ className, insights, ...props }: InsightsProps) => {
+export const Insights = ({
+  className,
+  toolPrice,
+  insights,
+  ...props
+}: InsightsProps) => {
   return (
-    <div className={cx("w-full flex text-xs gap-6 items-center", className)} {...props}>
+    <div
+      className={cx("w-full flex text-xs gap-6 items-center", className)}
+      {...props}
+    >
       {insights.map(({ label, value }) => {
         return value ? (
           <Fragment key={label}>
@@ -27,9 +36,9 @@ export const Insights = ({ className, insights, ...props }: InsightsProps) => {
           </Fragment>
         ) : null;
       })}
-      <p className=" text-xs text-gray-500">
+      <p className="text-secondar text-sm">
         {" "}
-        <span className="text-green-500">$</span> free + from $29/mo
+        <span className="text-green-500">$</span> free + from ${toolPrice}/mo
       </p>
     </div>
   );
