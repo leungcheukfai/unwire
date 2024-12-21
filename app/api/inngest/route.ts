@@ -14,7 +14,7 @@ export const maxDuration = 60;
 
 export const { GET, POST, PUT } = serve({
   client: inngest,
-  serveHost: "https://list.unwire.hk/api/inngest",
+  // serveHost: "https://list.unwire.hk/api/inngest",
   functions: [
     fetchTools,
     publishTools,

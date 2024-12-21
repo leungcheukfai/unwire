@@ -7,23 +7,8 @@ datasource db {
   provider     = "postgresql"
   url          = "postgresql://postgres.xevfbhgsxocotheazuuo:Kvbq8GVyGh29Vudw@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true&connection_limit=50&connect_timeout=30"
   directUrl    = "postgresql://postgres.xevfbhgsxocotheazuuo:Kvbq8GVyGh29Vudw@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres?connection_limit=50&connect_timeout=30&pool_timeout=30"
-  extensions   = [citext]
   relationMode = "prisma"
-}
-
-enum AdType {
-  Banner
-  Homepage
-  ToolPage
-  BlogPost
-  All
-}
-
-enum ToolStatus {
-  Draft
-  Scheduled
-  Published
-  Deleted
+  extensions   = [citext, uuid_ossp(map: "uuid-ossp", schema: "extensions")]
 }
 
 model Ad {
@@ -41,38 +26,37 @@ model Ad {
 }
 
 model Tool {
-  id             String     @id @default(cuid())
-  name           String     @db.Citext
-  slug           String     @unique
-  website        String     @unique
+  id             String              @id @default(cuid())
+  name           String              @db.Citext
+  slug           String              @unique
+  website        String              @unique
   tagline        String?
   description    String?
   content        String?
-  freeTier       Boolean    @default(false)
-  aiPowered      Boolean    @default(false)
-  chinese        Boolean    @default(false)
-  score          Int        @default(0)
+  score          Int                 @default(0)
   faviconUrl     String?
   screenshotUrl  String?
-  isFeatured     Boolean    @default(false)
+  isFeatured     Boolean             @default(false)
   submitterName  String?
   submitterEmail String?
   submitterNote  String?
   hostingUrl     String?
   discountCode   String?
   discountAmount String?
-  status         ToolStatus @default(Draft)
+  status         ToolStatus          @default(Draft)
   publishedAt    DateTime?
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
-
-  // Relations
-  licenseId    String?
-  license      License?            @relation(fields: [licenseId], references: [id])
-  alternatives AlternativeToTool[]
-  categories   CategoryToTools[]
-  languages    LanguageToTool[]
-  topics       TopicToTool[]
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+  licenseId      String?
+  aiPowered      Boolean             @default(false)
+  chinese        Boolean             @default(false)
+  freeTier       Boolean             @default(false)
+  price          String?
+  license        License?            @relation(fields: [licenseId], references: [id])
+  alternatives   AlternativeToTool[]
+  categories     CategoryToTools[]
+  languages      LanguageToTool[]
+  topics         TopicToTool[]
 
   @@index([id, slug])
 }
@@ -164,4 +148,19 @@ model TopicToTool {
   topic     Topic  @relation(fields: [topicSlug], references: [slug], onDelete: Cascade)
 
   @@id([toolId, topicSlug])
+}
+
+enum AdType {
+  Banner
+  Homepage
+  ToolPage
+  BlogPost
+  All
+}
+
+enum ToolStatus {
+  Draft
+  Scheduled
+  Published
+  Deleted
 }

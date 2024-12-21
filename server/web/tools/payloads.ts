@@ -42,6 +42,7 @@ export const toolOnePayload = Prisma.validator<Prisma.ToolSelect>()({
   hostingUrl: true,
   discountCode: true,
   discountAmount: true,
+  price: true,
   publishedAt: true,
   updatedAt: true,
   license: true,

@@ -382,6 +382,19 @@ export function ToolForm({
         />
         <FormField
           control={form.control}
+          name="price"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Price</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="freeTier"
           render={({ field }) => (
             <FormItem className="flex-1">
