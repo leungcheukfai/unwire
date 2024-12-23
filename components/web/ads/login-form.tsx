@@ -40,7 +40,7 @@ export default function LoginForm() {
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
       <div className="rounded-md shadow-sm -space-y-px my-4 flex-col flex gap-6">
-        <div className="!mb-4 pb-8">
+        <div>
           <input
             type="text"
             required
@@ -67,7 +67,7 @@ export default function LoginForm() {
       <div>
         <button
           type="submit"
-          className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="group relative w-full flex justify-center py-4 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
           Sign in
         </button>
