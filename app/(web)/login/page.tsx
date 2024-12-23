@@ -1,36 +1,14 @@
-import type { Metadata } from "next"
-import { redirect } from "next/navigation"
-import { Button } from "~/components/web/ui/button"
-import { Intro, IntroTitle } from "~/components/web/ui/intro"
-import { config } from "~/config"
-import { metadataConfig } from "~/config/metadata"
-import { auth, signIn } from "~/lib/auth"
+import LoginForm from "~/components/web/ads/login-form";
 
-export const metadata: Metadata = {
-  title: `Sign in to ${config.site.name}`,
-  openGraph: { ...metadataConfig.openGraph, url: "/login" },
-  alternates: { ...metadataConfig.alternates, canonical: "/login" },
-}
-
-export default async function LoginPage() {
-  const session = await auth()
-
-  if (session?.user) {
-    redirect("/admin")
-  }
-
-  const handleSignIn = async () => {
-    "use server"
-    await signIn("google", { redirectTo: "/admin" })
-  }
-
+export default function LoginPage() {
   return (
-    <Intro>
-      <IntroTitle>{`${metadata.title}`}</IntroTitle>
-
-      <Button size="lg" className="mt-4" onClick={handleSignIn}>
-        Continue with Google
-      </Button>
-    </Intro>
-  )
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          Sign in to your account
+        </h2>
+        <LoginForm />
+      </div>
+    </div>
+  );
 }

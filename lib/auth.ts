@@ -1,23 +1,24 @@
-import NextAuth from "next-auth"
-import Google from "next-auth/providers/google"
-import { env } from "~/env"
-import { isAllowedEmail } from "~/utils/auth"
+// app/actions/auth.ts
+"use server";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [
-    Google({
-      clientId: env.AUTH_GOOGLE_ID,
-      clientSecret: env.AUTH_GOOGLE_SECRET,
-    }),
-  ],
+import { cookies } from "next/headers";
+import { users } from "./user";
+export async function login(username: string, password: string) {
+  const user = users.find(
+    (u) => u.username === username && u.password === password
+  );
 
-  callbacks: {
-    signIn({ profile }) {
-      return isAllowedEmail(profile?.email)
-    },
-  },
+  if (user) {
+    (await cookies()).set("user", user.id, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+    });
+    return { success: true };
+  }
 
-  pages: {
-    signIn: "/login",
-  },
-})
+  return { success: false, error: "Invalid credentials" };
+}
+
+// app/lib/auth.ts
