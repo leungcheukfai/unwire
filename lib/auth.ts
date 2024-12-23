@@ -20,5 +20,15 @@ export async function login(username: string, password: string) {
 
   return { success: false, error: "Invalid credentials" };
 }
-
-// app/lib/auth.ts
+export async function signOut() {
+  // Delete the user cookie
+  (
+    await // Delete the user cookie
+    cookies()
+  ).delete("user");
+  return { success: true };
+}
+export async function ifLoggedIn() {
+  const user = (await cookies()).get("user");
+  if (user) return { success: true };
+}

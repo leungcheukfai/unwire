@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { cx } from "cva"
+import { cx } from "cva";
 import {
   CopyrightIcon,
   GalleryHorizontalEndIcon,
@@ -9,20 +9,28 @@ import {
   LayoutDashboardIcon,
   LogOutIcon,
   ReplaceIcon,
-} from "lucide-react"
-import { signOut } from "next-auth/react"
-import { Nav } from "~/components/admin/nav"
-import { NavMain } from "~/components/admin/nav-main"
-import { Separator } from "~/components/admin/ui/separator"
-import { siteConfig } from "~/config/site"
-import { useIsMobile } from "~/hooks/use-mobile"
+} from "lucide-react";
+import { Nav } from "~/components/admin/nav";
+import { NavMain } from "~/components/admin/nav-main";
+import { Separator } from "~/components/admin/ui/separator";
+import { siteConfig } from "~/config/site";
+import { useIsMobile } from "~/hooks/use-mobile";
+import { signOut } from "~/lib/auth";
 
 export const Sidebar = () => {
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
 
+  const handleSignOut = async () => {
+    await signOut();
+
+    window.location.href = "/login";
+  };
   return (
     <div
-      className={cx("sticky top-0 h-dvh z-40 flex flex-col border-r", isMobile ? "w-12" : "w-48")}
+      className={cx(
+        "sticky top-0 h-dvh z-40 flex flex-col border-r",
+        isMobile ? "w-12" : "w-48"
+      )}
     >
       <Nav>
         <NavMain
@@ -79,12 +87,12 @@ export const Sidebar = () => {
             {
               title: "Sign Out",
               href: "#",
-              onClick: () => signOut(),
+              onClick: () => handleSignOut(),
               prefix: <LogOutIcon />,
             },
           ]}
         />
       </Nav>
     </div>
-  )
-}
+  );
+};

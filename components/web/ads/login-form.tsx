@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { login } from "~/lib/auth";
+import { ifLoggedIn, login } from "~/lib/auth";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
@@ -26,6 +26,16 @@ export default function LoginForm() {
       setError("An error occurred");
     }
   };
+  const handleCheck = async () => {
+    const result = await ifLoggedIn();
+    console.log(result);
+    if (result?.success) {
+      router.push("/admin");
+    }
+  };
+  useEffect(() => {
+    handleCheck();
+  }, [router]);
 
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>

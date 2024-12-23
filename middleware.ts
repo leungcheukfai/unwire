@@ -20,5 +20,6 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
+  // Continue with the request if authenticated
   return NextResponse.next();
 }
