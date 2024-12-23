@@ -31,7 +31,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         logo: {
           "@type": "ImageObject",
           "@id": `${url}/#/schema/image/1`,
-          url: `https://cdn.unwire.hk/wp-content/uploads/fbrfg/favicon-32x32.png`,
+          url: "https://cdn.unwire.hk/wp-content/uploads/fbrfg/favicon-32x32.png",
           width: "480",
           height: "480",
           caption: `${config.site.name} Logo`,
