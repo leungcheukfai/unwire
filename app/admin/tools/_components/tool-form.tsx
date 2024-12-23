@@ -75,7 +75,6 @@ export function ToolForm({
         toast.error(err.message);
       },
     });
-console.log(tool);
   // Update tool
   const { execute: updateToolAction, isPending: isUpdatingTool } =
     useServerAction(updateTool, {

@@ -197,7 +197,11 @@ export default async function ToolPage(props: PageProps) {
               )}
             </Stack>
             <Stack size="sm">
-              <Insights insights={insights} toolPrice={tool.price|| '29'} className="mt-auto" />
+              <Insights
+                insights={insights}
+                toolPrice={tool.price || "29"}
+                className="mt-auto"
+              />
             </Stack>
           </div>
 

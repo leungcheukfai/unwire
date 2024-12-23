@@ -36,7 +36,7 @@ export const Insights = ({
           </Fragment>
         ) : null;
       })}
-      <p className="text-secondar text-sm">
+      <p className="text-secondary text-sm">
         {" "}
         <span className="text-green-500">$</span> free + from ${toolPrice}/mo
       </p>

@@ -112,7 +112,7 @@ const Button = ({
             </Slot>
 
             {!!isPending && (
-              <LoaderIcon className="absolute size-[1.25em] animate-spin text-white" />
+              <LoaderIcon className="absolute size-[1.25em] animate-spin text-black" />
             )}
           </>
         )}
