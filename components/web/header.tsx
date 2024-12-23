@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   CalendarDaysIcon,
@@ -8,55 +8,61 @@ import {
   GalleryHorizontalEndIcon,
   SearchIcon,
   TagIcon,
-} from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { type HTMLAttributes, Suspense, useEffect, useState } from "react"
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { type HTMLAttributes, Suspense, useEffect, useState } from "react";
 // import { BrandBlueskyIcon } from "~/components/common/icons/brand-bluesky"
 // import { BrandGitHubIcon } from "~/components/common/icons/brand-github"
-import { BrandXIcon } from "~/components/common/icons/brand-x"
-import { Stack } from "~/components/common/stack"
-import { SearchForm } from "~/components/web/search-form"
-import { Button } from "~/components/web/ui/button"
-import { Container } from "~/components/web/ui/container"
+import { BrandXIcon } from "~/components/common/icons/brand-x";
+import { Stack } from "~/components/common/stack";
+import { SearchForm } from "~/components/web/search-form";
+import { Button } from "~/components/web/ui/button";
+import { Container } from "~/components/web/ui/container";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "~/components/web/ui/dropdown-menu"
-import { Logo } from "~/components/web/ui/logo"
-import { NavigationLink, navigationLinkVariants } from "~/components/web/ui/navigation-link"
-import { config } from "~/config"
-import { cx } from "~/utils/cva"
-import { BrandFacebookIcon } from "../common/icons/brand-facebook"
-import { BrandInstagramIcon } from "../common/icons/brand-instagram"
-import { BrandThreadsIcon } from "../common/icons/brand-threads"
+} from "~/components/web/ui/dropdown-menu";
+import { Logo } from "~/components/web/ui/logo";
+import {
+  NavigationLink,
+  navigationLinkVariants,
+} from "~/components/web/ui/navigation-link";
+import { config } from "~/config";
+import { cx } from "~/utils/cva";
+import { BrandFacebookIcon } from "../common/icons/brand-facebook";
+import { BrandInstagramIcon } from "../common/icons/brand-instagram";
+import { BrandThreadsIcon } from "../common/icons/brand-threads";
 
-export const Header = ({ className, ...props }: HTMLAttributes<HTMLElement>) => {
-  const pathname = usePathname()
-  const [isNavOpen, setNavOpen] = useState(false)
+export const Header = ({
+  className,
+  ...props
+}: HTMLAttributes<HTMLElement>) => {
+  const pathname = usePathname();
+  const [isNavOpen, setNavOpen] = useState(false);
 
   // Close the mobile navigation when the user presses the "Escape" key
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setNavOpen(false)
-    }
+      if (e.key === "Escape") setNavOpen(false);
+    };
 
-    document.addEventListener("keydown", onKeyDown)
-    return () => document.removeEventListener("keydown", onKeyDown)
-  }, [])
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   useEffect(() => {
-    setNavOpen(false)
-  }, [pathname])
+    setNavOpen(false);
+  }, [pathname]);
 
   return (
     <Container
       className={cx(
         "group/menu sticky top-[var(--header-top)] inset-x-0 z-50 duration-300",
         "max-lg:data-[state=open]:bg-background/90",
-        className,
+        className
       )}
       id="header"
       role="banner"
@@ -100,7 +106,9 @@ export const Header = ({ className, ...props }: HTMLAttributes<HTMLElement>) => 
 
         <nav className="contents max-lg:hidden">
           <DropdownMenu>
-            <DropdownMenuTrigger className={cx(navigationLinkVariants({ className: "gap-1" }))}>
+            <DropdownMenuTrigger
+              className={cx(navigationLinkVariants({ className: "gap-1" }))}
+            >
               Browse{" "}
               <ChevronDownIcon className="group-data-[state=open]:-rotate-180 duration-200" />
             </DropdownMenuTrigger>
@@ -108,17 +116,20 @@ export const Header = ({ className, ...props }: HTMLAttributes<HTMLElement>) => 
             <DropdownMenuContent align="start">
               <DropdownMenuItem asChild>
                 <NavigationLink href="/?sort=publishedAt.desc">
-                  <CalendarDaysIcon className="shrink-0 size-4 opacity-75" /> Latest tools
+                  <CalendarDaysIcon className="shrink-0 size-4 opacity-75" />{" "}
+                  Latest tools
                 </NavigationLink>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <NavigationLink href="/categories">
-                  <GalleryHorizontalEndIcon className="shrink-0 size-4 opacity-75" /> Categories
+                  <GalleryHorizontalEndIcon className="shrink-0 size-4 opacity-75" />{" "}
+                  Categories
                 </NavigationLink>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <NavigationLink href="/languages">
-                  <CodeXmlIcon className="shrink-0 size-4 opacity-75" /> Languages
+                  <CodeXmlIcon className="shrink-0 size-4 opacity-75" />{" "}
+                  Languages
                 </NavigationLink>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
@@ -128,7 +139,8 @@ export const Header = ({ className, ...props }: HTMLAttributes<HTMLElement>) => 
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <NavigationLink href="/licenses">
-                  <CopyrightIcon className="shrink-0 size-4 opacity-75" /> Licenses
+                  <CopyrightIcon className="shrink-0 size-4 opacity-75" />{" "}
+                  Licenses
                 </NavigationLink>
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -189,7 +201,7 @@ export const Header = ({ className, ...props }: HTMLAttributes<HTMLElement>) => 
       <nav
         className={cx(
           "absolute top-full inset-x-0 h-[calc(100dvh-var(--header-top)-var(--header-height))] -mt-px py-4 px-6 grid grid-cols-2 place-items-start place-content-start gap-x-4 gap-y-6 bg-background/90 backdrop-blur-lg transition-opacity lg:hidden",
-          isNavOpen ? "opacity-100" : "opacity-0 pointer-events-none",
+          isNavOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
       >
         <NavigationLink href="/?sort=publishedAt.desc" className="text-base">
@@ -222,5 +234,5 @@ export const Header = ({ className, ...props }: HTMLAttributes<HTMLElement>) => 
         </Suspense>
       </nav>
     </Container>
-  )
-}
+  );
+};

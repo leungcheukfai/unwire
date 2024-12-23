@@ -1,19 +1,19 @@
-import Script from "next/script"
-import { type PropsWithChildren, Suspense } from "react"
-import type { Graph } from "schema-dts"
-import { AdBanner } from "~/components/web/ads/ad-banner"
-import { Bottom } from "~/components/web/bottom"
-import { Footer } from "~/components/web/footer"
-import { Header } from "~/components/web/header"
-import { Container } from "~/components/web/ui/container"
-import { config } from "~/config"
-import { env } from "~/env"
+import Script from "next/script";
+import { type PropsWithChildren, Suspense } from "react";
+import type { Graph } from "schema-dts";
+import { AdBanner } from "~/components/web/ads/ad-banner";
+import { Bottom } from "~/components/web/bottom";
+import { Footer } from "~/components/web/footer";
+import { Header } from "~/components/web/header";
+import { Container } from "~/components/web/ui/container";
+import { config } from "~/config";
+import { env } from "~/env";
 
-import "./styles.css"
-import Providers from "~/app/(web)/providers"
+import "./styles.css";
+import Providers from "~/app/(web)/providers";
 
 export default function RootLayout({ children }: PropsWithChildren) {
-  const url = config.site.url
+  const url = config.site.url;
   const jsonLd: Graph = {
     "@context": "https://schema.org",
     "@graph": [
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         logo: {
           "@type": "ImageObject",
           "@id": `${url}/#/schema/image/1`,
-          url: `${url}/favicon.png`,
+          url: `https://cdn.unwire.hk/wp-content/uploads/fbrfg/favicon-32x32.png`,
           width: "480",
           height: "480",
           caption: `${config.site.name} Logo`,
@@ -61,7 +61,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
         about: { "@id": `${url}#/schema/organization/1` },
       },
     ],
-  }
+  };
 
   return (
     <Providers>
@@ -96,7 +96,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
         data-api={`${env.NEXT_PUBLIC_PLAUSIBLE_HOST}/api/event`}
         src={`${env.NEXT_PUBLIC_PLAUSIBLE_HOST}/js/script.js`}
       />
-      
     </Providers>
-  )
+  );
 }

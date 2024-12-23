@@ -62,9 +62,9 @@ const AdCard = async ({ className, type, ...props }: AdCardProps) => {
           <span>{isDefault ? "Advertise" : `Visit ${ad.name}`}</span>
         </Button>
 
-        {isDefault && (
+        {/* {isDefault && (
           <LogoSymbol className="absolute -bottom-2/5 -right-1/4 -z-10 size-64 opacity-[3.5%] rotate-45 pointer-events-none transition group-hover/button:rotate-[60deg]" />
-        )}
+        )} */}
       </ExternalLink>
     </Card>
   )
