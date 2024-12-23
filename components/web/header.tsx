@@ -12,9 +12,6 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type HTMLAttributes, Suspense, useEffect, useState } from "react";
-// import { BrandBlueskyIcon } from "~/components/common/icons/brand-bluesky"
-// import { BrandGitHubIcon } from "~/components/common/icons/brand-github"
-import { BrandXIcon } from "~/components/common/icons/brand-x";
 import { Stack } from "~/components/common/stack";
 import { SearchForm } from "~/components/web/search-form";
 import { Button } from "~/components/web/ui/button";
@@ -155,23 +152,7 @@ export const Header = ({
             <SearchForm />
           </Suspense>
 
-          <NavigationLink
-            href={config.links.bluesky}
-            target="_blank"
-            rel="nofollow noreferrer"
-            title="Follow us on Bluesky"
-          >
-            <BrandThreadsIcon className="size-4" />
-          </NavigationLink>
 
-          <NavigationLink
-            href={config.links.twitter}
-            target="_blank"
-            rel="nofollow noreferrer"
-            title="Follow us on X"
-          >
-            <BrandXIcon className="size-4" />
-          </NavigationLink>
 
           <NavigationLink
             href={config.links.github}
