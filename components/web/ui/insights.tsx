@@ -13,13 +13,15 @@ type InsightsProps = HTMLAttributes<HTMLElement> & {
     label: string;
     value: ReactNode;
   }[];
-  toolPrice: string;
+  toolPrice?: string;
+  freeTier: boolean;
 };
 
 export const Insights = ({
   className,
   toolPrice,
   insights,
+  freeTier,
   ...props
 }: InsightsProps) => {
   return (
@@ -36,10 +38,14 @@ export const Insights = ({
           </Fragment>
         ) : null;
       })}
-      <p className="text-secondary text-sm">
-        {" "}
-        <span className="text-green-500">$</span> free + from ${toolPrice}/mo
-      </p>
+        {freeTier || toolPrice ? (
+          <p className="text-xs text-gray-500">
+            <span className="text-green-500">{(freeTier || toolPrice) && "$"}</span>
+            {freeTier && "free "}
+            {freeTier && toolPrice && "+"}
+            {toolPrice && `from ${toolPrice}/mo`}
+          </p>
+        ) : null}
     </div>
   );
 };

@@ -199,7 +199,8 @@ export default async function ToolPage(props: PageProps) {
             <Stack size="sm">
               <Insights
                 insights={insights}
-                toolPrice={tool.price || "29"}
+                toolPrice={tool.price ?? undefined}
+                freeTier={tool.freeTier}
                 className="mt-auto"
               />
             </Stack>

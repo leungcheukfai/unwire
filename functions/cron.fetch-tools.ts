@@ -20,14 +20,14 @@ export const fetchTools = inngest.createFunction(
 
 
     // Post on Socials about a random tool
-    await step.run("post-on-socials", async () => {
-      const tool = await findRandomTool()
+    // await step.run("post-on-socials", async () => {
+    //   const tool = await findRandomTool()
 
-      if (tool) {
-        const template = await getPostTemplate(tool)
-        return sendSocialPost(template, tool)
-      }
-    })
+    //   if (tool) {
+    //     const template = await getPostTemplate(tool)
+    //     return sendSocialPost(template, tool)
+    //   }
+    // })
 
     // Disconnect from DB
     await step.run("disconnect-from-db", async () => {
