@@ -48,7 +48,7 @@ const CardFooter = ({ className, ...props }: ComponentProps<"div">) => {
 const CardDescription = ({ className, ...props }: ComponentProps<"p">) => {
   return (
     <p
-      className={cx("line-clamp-2 text-sm/normal text-secondary text-pretty", className)}
+      className={cx("line-clamp-2 text-sm/normal text-secondary text-pretty min-h-14", className)}
       {...props}
     />
   )

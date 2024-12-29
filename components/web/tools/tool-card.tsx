@@ -57,7 +57,9 @@ const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
         {/* <Insights insights={insights} className="mt-auto" /> */}
         {tool.freeTier || tool.price ? (
           <p className="text-xs text-gray-500 pt-10">
-            <span className="text-green-500">{(tool.freeTier || tool.price) && "$"}</span>
+            <span className="text-green-500">
+              {(tool.freeTier || tool.price) && "$ "}
+            </span>
             {tool.freeTier && "free "}
             {tool.freeTier && tool.price && "+"}
             {tool.price && `from ${tool.price}/mo`}
