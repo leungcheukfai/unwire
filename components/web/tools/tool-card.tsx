@@ -62,7 +62,7 @@ const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
             </span>
             {tool.freeTier && "free "}
             {tool.freeTier && tool.price && "+"}
-            {tool.price && ` from ${tool.price}/mo`}
+            {tool.price && ` from $${tool.price}/mo`}
           </p>
         ) : null}
       </Link>
