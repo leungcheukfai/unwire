@@ -40,10 +40,10 @@ export const Insights = ({
       })}
         {freeTier || toolPrice ? (
           <p className="text-xs text-gray-500">
-            <span className="text-green-500">{(freeTier || toolPrice) && "$"}</span>
+            <span className="text-green-500">{(freeTier || toolPrice) && "$ "}</span>
             {freeTier && "free "}
-            {freeTier && toolPrice && "+"}
-            {toolPrice && `from ${toolPrice}/mo`}
+            {freeTier && toolPrice && "+ "}
+            {toolPrice && `from $${toolPrice}/mo`}
           </p>
         ) : null}
     </div>

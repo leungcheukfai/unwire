@@ -1,44 +1,54 @@
-import { getRandomElement } from "@curiousleaf/utils"
-import { type Prisma, type Tool, ToolStatus } from "@prisma/client"
-import { console } from "node:inspector"
-import type { inferParserType } from "nuqs/server"
-import { cache } from "~/lib/cache"
+import { getRandomElement } from "@curiousleaf/utils";
+import { type Prisma, type Tool, ToolStatus } from "@prisma/client";
+import type { inferParserType } from "nuqs/server";
+import { cache } from "~/lib/cache";
 import {
   toolManyExtendedPayload,
   toolManyPayload,
   toolOnePayload,
-} from "~/server/web/tools/payloads"
-import type { toolsSearchParams } from "~/server/web/tools/search-params"
-import { prisma } from "~/services/prisma"
+} from "~/server/web/tools/payloads";
+import type { toolsSearchParams } from "~/server/web/tools/search-params";
+import { prisma } from "~/services/prisma";
 
-export const searchTools = 
+export const searchTools = cache(
   async (
-    { q, category, page, sort, perPage }: inferParserType<typeof toolsSearchParams>,
-    { where, ...args }: Prisma.ToolFindManyArgs,
+    {
+      q,
+      category,
+      page,
+      sort,
+      perPage,
+    }: inferParserType<typeof toolsSearchParams>,
+    { where, ...args }: Prisma.ToolFindManyArgs
   ) => {
     // Values to paginate the results
-    const skip = (page - 1) * perPage
-    const take = perPage
+    const skip = (page - 1) * perPage;
+    const take = perPage;
 
     // Column and order to sort by
     // Spliting the sort string by "." to get the column and order
     // Example: "title.desc" => ["title", "desc"]
-    const [sortBy, sortOrder] = sort.split(".")
+    const [sortBy, sortOrder] = sort.split(".");
+
     const whereQuery: Prisma.ToolWhereInput = {
       status: ToolStatus.Published,
-      ...(category && { categories: { some: { category: { slug: category } } } }),
+      ...(category && {
+        categories: { some: { category: { slug: category } } },
+      }),
       ...(q && {
         OR: [
           { name: { contains: q, mode: "insensitive" } },
           { description: { contains: q, mode: "insensitive" } },
         ],
       }),
-    }
+    };
 
     const [tools, totalCount] = await prisma.$transaction([
       prisma.tool.findMany({
         ...args,
-        orderBy:  { [sortBy]: sortOrder },
+        orderBy: sortBy
+          ? { [sortBy]: sortOrder }
+          : { isFeatured: "desc" },
         where: { ...whereQuery, ...where },
         select: toolManyPayload,
         take,
@@ -48,10 +58,12 @@ export const searchTools =
       prisma.tool.count({
         where: { ...whereQuery, ...where },
       }),
-    ])
+    ]);
 
-    return { tools, totalCount }
-  }
+    return { tools, totalCount };
+  },
+  ["tools"]
+);
 
 export const findRelatedTools = async ({
   where,
@@ -63,16 +75,24 @@ export const findRelatedTools = async ({
     AND: [
       { status: ToolStatus.Published },
       { slug: { not: slug } },
-      { alternatives: { some: { alternative: { tools: { some: { tool: { slug } } } } } } },
+      {
+        alternatives: {
+          some: { alternative: { tools: { some: { tool: { slug } } } } },
+        },
+      },
     ],
-  } satisfies Prisma.ToolWhereInput
+  } satisfies Prisma.ToolWhereInput;
 
-  const take = 3
-  const itemCount = await prisma.tool.count({ where: relatedWhereClause })
-  const skip = Math.max(0, Math.floor(Math.random() * itemCount) - take)
-  const properties = ["id", "name", "score"] satisfies (keyof Prisma.ToolOrderByWithRelationInput)[]
-  const orderBy = getRandomElement(properties)
-  const orderDir = getRandomElement(["asc", "desc"] as const)
+  const take = 3;
+  const itemCount = await prisma.tool.count({ where: relatedWhereClause });
+  const skip = Math.max(0, Math.floor(Math.random() * itemCount) - take);
+  const properties = [
+    "id",
+    "name",
+    "score",
+  ] satisfies (keyof Prisma.ToolOrderByWithRelationInput)[];
+  const orderBy = getRandomElement(properties);
+  const orderDir = getRandomElement(["asc", "desc"] as const);
 
   return prisma.tool.findMany({
     ...args,
@@ -81,18 +101,20 @@ export const findRelatedTools = async ({
     orderBy: { [orderBy]: orderDir },
     take,
     skip,
-  })
-}
+  });
+};
 
-export const findTools = 
+export const findTools = cache(
   async ({ where, orderBy, ...args }: Prisma.ToolFindManyArgs) => {
     return prisma.tool.findMany({
       ...args,
       where: { status: ToolStatus.Published, ...where },
       orderBy: orderBy ?? [{ isFeatured: "desc" }, { score: "desc" }],
       select: toolManyPayload,
-    })
-  }
+    });
+  },
+  ["tools"]
+);
 
 export const findToolsWithCategories = cache(
   async ({ where, ...args }: Prisma.ToolFindManyArgs) => {
@@ -100,41 +122,51 @@ export const findToolsWithCategories = cache(
       ...args,
       where: { status: ToolStatus.Published, ...where },
       select: toolManyExtendedPayload,
-    })
+    });
   },
-  ["tools"],
-)
+  ["tools"]
+);
 
-export const findToolSlugs = async ({ where, orderBy, ...args }: Prisma.ToolFindManyArgs) => {
+export const findToolSlugs = async ({
+  where,
+  orderBy,
+  ...args
+}: Prisma.ToolFindManyArgs) => {
   return prisma.tool.findMany({
     ...args,
     orderBy: orderBy ?? { name: "asc" },
     where: { status: ToolStatus.Published, ...where },
     select: { slug: true, updatedAt: true },
-  })
-}
+  });
+};
 
 export const countUpcomingTools = cache(
   async ({ where, ...args }: Prisma.ToolCountArgs) => {
     return prisma.tool.count({
       ...args,
-      where: { status: { in: [ToolStatus.Scheduled, ToolStatus.Draft] }, ...where },
-    })
+      where: {
+        status: { in: [ToolStatus.Scheduled, ToolStatus.Draft] },
+        ...where,
+      },
+    });
   },
-  ["schedule"],
-)
+  ["schedule"]
+);
 
-export const findToolBySlug = (slug: string, { where, ...args }: Prisma.ToolFindFirstArgs = {}) =>
+export const findToolBySlug = (
+  slug: string,
+  { where, ...args }: Prisma.ToolFindFirstArgs = {}
+) =>
   cache(
     async (slug: string) => {
       return prisma.tool.findFirst({
         ...args,
         where: { slug, status: { not: ToolStatus.Draft }, ...where },
         select: toolOnePayload,
-      })
+      });
     },
-    ["tool", `tool-${slug}`],
-  )(slug)
+    ["tool", `tool-${slug}`]
+  )(slug);
 
 export const findRandomTool = async () => {
   const tools = await prisma.$queryRaw<Array<Tool>>`
@@ -144,7 +176,7 @@ export const findRandomTool = async () => {
     GROUP BY id
     ORDER BY RANDOM()
     LIMIT 1
-  `
+  `;
 
-  return tools[0]
-}
+  return tools[0];
+};
