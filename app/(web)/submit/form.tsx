@@ -78,7 +78,7 @@ export const SubmitForm = ({
           name="submitterName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel isRequired>Your Name:</FormLabel>
+              <FormLabel isRequired>你的名字:</FormLabel>
               <FormControl>
                 <Input
                   type="text"
@@ -98,7 +98,7 @@ export const SubmitForm = ({
           name="submitterEmail"
           render={({ field }) => (
             <FormItem>
-              <FormLabel isRequired>Your Email:</FormLabel>
+              <FormLabel isRequired>你的電郵地址:</FormLabel>
               <FormControl>
                 <Input
                   type="email"
@@ -118,12 +118,12 @@ export const SubmitForm = ({
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel isRequired>Name:</FormLabel>
+              <FormLabel isRequired>工具名稱:</FormLabel>
               <FormControl>
                 <Input
                   type="text"
                   size="lg"
-                  placeholder="PostHog"
+                  placeholder="UNWIRE"
                   data-1p-ignore
                   {...field}
                 />
@@ -138,12 +138,12 @@ export const SubmitForm = ({
           name="website"
           render={({ field }) => (
             <FormItem>
-              <FormLabel isRequired>Website URL:</FormLabel>
+              <FormLabel isRequired>網站 URL:</FormLabel>
               <FormControl>
                 <Input
                   type="url"
                   size="lg"
-                  placeholder="https://posthog.com"
+                  placeholder="https://unwire.hk"
                   {...field}
                 />
               </FormControl>
@@ -157,12 +157,12 @@ export const SubmitForm = ({
           name="submitterNote"
           render={({ field }) => (
             <FormItem className="col-span-full">
-              <FormLabel>Suggest an alternative:</FormLabel>
+              <FormLabel>簡單介紹</FormLabel>
               <FormControl>
                 <Input
                   type="text"
                   size="lg"
-                  placeholder="Which well-known tool is this an alternative to?"
+                  placeholder="這個工具的類別是Sales & Marketing..."
                   {...field}
                 />
               </FormControl>
@@ -183,7 +183,7 @@ export const SubmitForm = ({
                 />
               </FormControl>
               <FormLabel className="font-normal">
-                I'd like to receive free email updates
+              訂閱UNWIRE科技電子報
               </FormLabel>
               <FormMessage />
             </FormItem>
@@ -197,7 +197,7 @@ export const SubmitForm = ({
             disabled={isPending}
             className="flex min-w-32"
           >
-            Submit
+            提交
           </Button>
         </div>
 

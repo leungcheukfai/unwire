@@ -51,12 +51,11 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
           ) : (
             <Stack size="lg" direction="column" className="min-w-0 max-w-64">
               <H5 as="strong" className="px-0.5 font-medium">
-                Subscribe to our newsletter
+                UNWIRE科技電子報
               </H5>
 
               <p className="-mt-2 px-0.5 text-sm text-muted first:mt-0">
-                Join {formatNumber(config.stats.subscribers, "standard")}+ other members and get
-                updates on new open source tools.
+              已經超過 {formatNumber(config.stats.subscribers, "standard")}人訂閱
               </p>
 
               <NewsletterForm medium="footer_form" />
@@ -138,26 +137,26 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
         </div>
 
         <Stack className="gap-x-4 text-sm/normal flex-col items-start md:col-span-3 md:col-start-8">
-          <H6 as="strong">Browse:</H6>
+          <H6 as="strong">瀏覽:</H6>
 
-          <NavigationLink href="/alternatives">Alternatives</NavigationLink>
-          <NavigationLink href="/categories">Categories</NavigationLink>
-          <NavigationLink href="/languages">Languages</NavigationLink>
-          <NavigationLink href="/topics">Topics</NavigationLink>
-          <NavigationLink href="/licenses">Licenses</NavigationLink>
+          <NavigationLink href="/alternatives">工具選擇</NavigationLink>
+          <NavigationLink href="/categories">工具分類</NavigationLink>
+          {/* <NavigationLink href="/languages">Languages</NavigationLink> */}
+          {/* <NavigationLink href="/topics">工具列表</NavigationLink> */}
+          {/* <NavigationLink href="/licenses">Licenses</NavigationLink> */}
         </Stack>
 
         <Stack className="gap-x-4 text-sm/normal flex-col items-start md:col-span-3">
-          <H6 as="strong">Quick Links:</H6>
+          <H6 as="strong">快速連結:</H6>
 
-          <NavigationLink href="/advertise">Advertise with Us</NavigationLink>
-          <NavigationLink href="/submit">Add a Free Listing</NavigationLink>
-          <NavigationLink href="/about">About Us</NavigationLink>
-          <NavigationLink href="/blog">Blog</NavigationLink>
+          <NavigationLink href="/advertise">與我們合作</NavigationLink>
+          <NavigationLink href="/submit">免費新增工具</NavigationLink>
+          <NavigationLink href="/about">關於我們</NavigationLink>
+          <NavigationLink href="/blog">BLOG</NavigationLink>
         </Stack>
 
         <Stack className="gap-x-4 text-sm/normal flex-col items-start md:col-span-3">
-          <H6 as="strong">Other Products:</H6>
+          <H6 as="strong">其他連結:</H6>
 
           {config.links.family.map(({ href, title, description }) => (
             <NavigationLink
@@ -180,7 +179,7 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
+          {/* <img
             src="/authors/piotrkulpinski.webp"
             alt="Piotr Kulpinski"
             loading="lazy"
@@ -188,11 +187,11 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
             height="16"
             decoding="async"
             className="max-sm:hidden size-4 rounded-full"
-          />
-          Made by Piotr Kulpinski
+          /> */}
+          {/* Made by Piotr Kulpinski */}
         </NavigationLink>
 
-        <p className="text-xs text-muted">This website may contain affiliate links</p>
+        <p className="text-xs text-muted">此網站可能包含推廣連結</p>
       </div>
 
       {children}

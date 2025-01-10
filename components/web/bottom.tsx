@@ -60,7 +60,7 @@ export const Bottom = async ({ className, ...props }: ComponentProps<"div">) => 
 
         {!!categories?.length && (
           <Stack className="gap-x-4 text-sm/normal">
-            <H6 as="strong">Popular Categories:</H6>
+            <H6 as="strong">熱門工具分類:</H6>
 
             <div className="grid grid-cols-2xs gap-x-4 gap-y-2 w-full sm:grid-cols-xs">
               {categories.map(category => (

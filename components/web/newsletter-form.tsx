@@ -28,7 +28,7 @@ export const NewsletterForm = ({
   children,
   className,
   medium = "subscribe_form",
-  placeholder = "Enter your email",
+  placeholder = "請輸入你的電郵地址",
   size = "md",
   buttonProps = { size: "sm", children: "Subscribe" },
   ...props

@@ -12,16 +12,16 @@ export type AdSpot = {
 export const adsConfig = {
   adSpots: [
     {
-      label: "Homepage Ad",
+      label: "主頁位廣告",
       type: "Homepage",
-      description: "Visible on the homepage and search",
+      description: "顯示喺主頁同搜尋結果中",
       price: 15,
       preview: "https://share.cleanshot.com/7CFqSw0b",
     },
     {
-      label: "Banner Ad",
+      label: "Banner位廣告",
       type: "Banner",
-      description: "Visible on every page of the website",
+      description: "顯示喺UNWIRE LIST網站每一頁",
       price: 25,
       preview: "https://share.cleanshot.com/SvqTztKT",
     },
@@ -30,9 +30,9 @@ export const adsConfig = {
   defaultAd: {
     type: "All",
     website: "/advertise",
-    name: "Advertise with us",
+    name: "與 UNWIRE 合作",
     description:
-      "Reach out to our audience of professional open source/tech enthusiasts to boost your sales.",
+      "接觸香港科技愛好者，提升品牌曝光率及推廣效果",
     faviconUrl: null,
   } satisfies AdOne,
 

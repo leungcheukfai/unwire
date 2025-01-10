@@ -146,7 +146,7 @@ export const AdsPicker = ({ className, ads, ...props }: AdsCalendarProps) => {
               )}
             </>
           ) : (
-            <p>Please select dates for at least one ad type</p>
+            <p>請選擇至少一種廣告類型嘅日期</p>
           )}
 
           <Button
@@ -157,7 +157,7 @@ export const AdsPicker = ({ className, ads, ...props }: AdsCalendarProps) => {
             className="max-sm:w-full sm:-my-2"
             onClick={handleCheckout}
           >
-            Purchase Now
+            立即購買
           </Button>
         </div>
       </div>

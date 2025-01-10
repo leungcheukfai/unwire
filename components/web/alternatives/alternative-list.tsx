@@ -18,7 +18,7 @@ const AlternativeList = ({ alternatives, ...props }: AlternativeListProps) => {
         <AlternativeCard key={alternative.slug} alternative={alternative} showCount />
       ))}
 
-      {!alternatives.length && <EmptyList>No alternatives found.</EmptyList>}
+      {!alternatives.length && <EmptyList>找不到任何適合工具。</EmptyList>}
     </Grid>
   )
 }

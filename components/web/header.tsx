@@ -106,7 +106,7 @@ export const Header = ({
             <DropdownMenuTrigger
               className={cx(navigationLinkVariants({ className: "gap-1" }))}
             >
-              Browse{" "}
+              瀏覽{" "}
               <ChevronDownIcon className="group-data-[state=open]:-rotate-180 duration-200" />
             </DropdownMenuTrigger>
 
@@ -114,37 +114,37 @@ export const Header = ({
               <DropdownMenuItem asChild>
                 <NavigationLink href="/?sort=publishedAt.desc">
                   <CalendarDaysIcon className="shrink-0 size-4 opacity-75" />{" "}
-                  Latest tools
+                  最新工具
                 </NavigationLink>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <NavigationLink href="/categories">
                   <GalleryHorizontalEndIcon className="shrink-0 size-4 opacity-75" />{" "}
-                  Categories
+                  工具分類
                 </NavigationLink>
               </DropdownMenuItem>
-              <DropdownMenuItem asChild>
+              {/* <DropdownMenuItem asChild>
                 <NavigationLink href="/languages">
                   <CodeXmlIcon className="shrink-0 size-4 opacity-75" />{" "}
                   Languages
                 </NavigationLink>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
+              </DropdownMenuItem> */}
+              {/* <DropdownMenuItem asChild>
                 <NavigationLink href="/topics">
                   <TagIcon className="shrink-0 size-4 opacity-75" /> Topics
                 </NavigationLink>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
+              </DropdownMenuItem> */}
+              {/* <DropdownMenuItem asChild>
                 <NavigationLink href="/licenses">
                   <CopyrightIcon className="shrink-0 size-4 opacity-75" />{" "}
                   Licenses
                 </NavigationLink>
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <NavigationLink href="/alternatives">Alternatives</NavigationLink>
-          <NavigationLink href="/advertise">Advertise</NavigationLink>
+          <NavigationLink href="/alternatives">工具選擇</NavigationLink>
+          <NavigationLink href="/advertise">推廣合作</NavigationLink>
         </nav>
 
         <Stack size="sm" className="max-sm:hidden">
@@ -155,18 +155,18 @@ export const Header = ({
 
 
           <NavigationLink
-            href={config.links.github}
+            href={config.links.instagram}
             target="_blank"
             rel="nofollow noreferrer"
-            title="View source code"
+            title="追蹤我哋嘅Instagram專頁"
           >
             <BrandInstagramIcon className="size-4" />
           </NavigationLink>
           <NavigationLink
-            href={config.links.github}
+            href={config.links.facebook}
             target="_blank"
             rel="nofollow noreferrer"
-            title="View source code"
+            title="追蹤我哋嘅Facebook專頁"
           >
             <BrandFacebookIcon className="size-4" />
           </NavigationLink>
@@ -174,7 +174,7 @@ export const Header = ({
 
         <Button size="sm" variant="secondary" asChild>
           <Link href="/submit" prefetch={false}>
-            Submit
+            新增工具
           </Link>
         </Button>
       </div>
@@ -186,28 +186,28 @@ export const Header = ({
         )}
       >
         <NavigationLink href="/?sort=publishedAt.desc" className="text-base">
-          Latest
+          最新
         </NavigationLink>
         <NavigationLink href="/categories" className="text-base">
-          Categories
+          工具分類
         </NavigationLink>
         <NavigationLink href="/alternatives" className="text-base">
-          Alternatives
+          工具選擇
         </NavigationLink>
-        <NavigationLink href="/languages" className="text-base">
+        {/* <NavigationLink href="/languages" className="text-base">
           Languages
         </NavigationLink>
         <NavigationLink href="/topics" className="text-base">
           Topics
-        </NavigationLink>
+        </NavigationLink> */}
         <NavigationLink href="/submit" className="text-base">
-          Submit
+          提交工具
         </NavigationLink>
         <NavigationLink href="/advertise" className="text-base">
-          Advertise
+          推廣合作
         </NavigationLink>
         <NavigationLink href="/about" className="text-base">
-          About
+          關於我們
         </NavigationLink>
 
         <Suspense fallback={<SearchIcon className="size-4 sm:hidden" />}>

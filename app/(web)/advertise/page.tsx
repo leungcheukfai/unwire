@@ -11,8 +11,8 @@ import { metadataConfig } from "~/config/metadata"
 import { findAds } from "~/server/web/ads/queries"
 
 export const metadata: Metadata = {
-  title: `Advertise on ${config.site.name}`,
-  description: `Promote your business or software on ${config.site.name} and reach a wide audience of open source enthusiasts.`,
+  title: `在${config.site.name} 推廣你的軟件或工具`,
+  description: `立即在${config.site.name} 推廣你嘅業務或軟件，接觸廣大嘅香港科技愛好者。`,
   openGraph: { ...metadataConfig.openGraph, url: "/advertise" },
   alternates: { ...metadataConfig.alternates, canonical: "/advertise" },
 }
@@ -26,12 +26,12 @@ export default async function AdvertisePage() {
         <IntroTitle>{`${metadata.title}`}</IntroTitle>
 
         <IntroDescription className="max-w-3xl">
-          Promote your business or software and reach a wide audience of open source enthusiasts.
-          Check our{" "}
+          推廣你嘅業務或軟件，接觸廣大嘅香港科技愛好者。
+          {/* Check our{" "}
           <a href={config.links.analytics} target="_blank" rel="noopener noreferrer nofollow">
             real-time analytics
           </a>{" "}
-          to see what impact it could have on your business.
+          to see what impact it could have on your business. */}
         </IntroDescription>
       </Intro>
 
@@ -39,32 +39,32 @@ export default async function AdvertisePage() {
 
       <Stats className="my-4" />
 
-      {config.ads.testimonials.map(testimonial => (
+      {/* {config.ads.testimonials.map(testimonial => (
         <Testimonial key={testimonial.quote} {...testimonial} className="my-4" />
-      ))}
+      ))} */}
 
-      <div className="flex flex-col items-center text-center gap-6 mt-4" id="advertisers">
+      {/* <div className="flex flex-col items-center text-center gap-6 mt-4" id="advertisers">
         <p className="text-sm text-muted">
-          Join these companies in advertising their business on {config.site.name}
+          與我們合作的品牌
         </p>
 
         <Advertisers />
-      </div>
+      </div> */}
 
       <hr />
 
       <Intro alignment="center" className="md:my-4 lg:my-8">
         <IntroTitle size="h2" as="h3">
-          Interested in Advertising?
+          有興趣刊登廣告？
         </IntroTitle>
 
         <IntroDescription className="max-w-lg">
-          Tell us more about your company and we will get back to you as soon as possible.
+          話畀我哋知更多關於你公司嘅資料，我哋會盡快聯絡你！
         </IntroDescription>
 
         <Button variant="fancy" className="mt-4 min-w-40" asChild>
           <Link href={`mailto:${config.site.email}`} target="_blank" rel="noopener noreferrer">
-            Contact us
+            聯絡我們
           </Link>
         </Button>
       </Intro>

@@ -39,9 +39,9 @@ export const AlternativeFilters = ({ placeholder }: AlternativeFiltersProps) => 
   }, [filters])
 
   const sortOptions = [
-    { value: "popularity.desc", label: "Popularity" },
-    { value: "name.asc", label: "Name A-Z" },
-    { value: "name.desc", label: "Name Z-A" },
+    { value: "popularity.desc", label: "熱門" },
+    { value: "name.asc", label: "名稱 A-Z" },
+    { value: "name.desc", label: "名稱 Z-A" },
   ]
 
   return (
@@ -55,7 +55,7 @@ export const AlternativeFilters = ({ placeholder }: AlternativeFiltersProps) => 
           size="lg"
           value={inputValue}
           onChange={e => setInputValue(e.target.value)}
-          placeholder={placeholder || "Search alternatives..."}
+          placeholder={placeholder || "尋找工具..."}
           className="w-full truncate pl-10"
         />
       </div>
@@ -67,7 +67,7 @@ export const AlternativeFilters = ({ placeholder }: AlternativeFiltersProps) => 
         onChange={e => updateFilters({ sort: e.target.value })}
       >
         <option value="" disabled>
-          Order by
+          排序
         </option>
 
         {sortOptions.map(option => (

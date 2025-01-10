@@ -19,7 +19,7 @@ export default function Home({ searchParams }: PageProps) {
       <section className="flex flex-col gap-y-6 w-full mb-[2vh]">
         <Intro alignment="center">
           <IntroTitle className="max-w-[45rem] lg:text-5xl!">
-            Discover {config.site.tagline}
+            為您 {config.site.tagline}
           </IntroTitle>
 
           <IntroDescription className="lg:mt-2">{config.site.description}</IntroDescription>
@@ -32,7 +32,7 @@ export default function Home({ searchParams }: PageProps) {
         <NewsletterForm
           size="lg"
           className="max-w-sm mx-auto items-center text-center"
-          buttonProps={{ children: "Join our community", size: "md", variant: "fancy" }}
+          buttonProps={{ children: "加入 UNWIRE 社群", size: "md", variant: "fancy" }}
         >
           <NewsletterProof />
         </NewsletterForm>

@@ -9,8 +9,8 @@ import { config } from "~/config"
 import { metadataConfig } from "~/config/metadata"
 
 export const metadata: Metadata = {
-  title: "Submit your Open Source Software",
-  description: `Help us grow the list of open source alternatives to proprietary software. Contribute to ${config.site.name} by submitting a new open source alternative.`,
+  title: "提交你嘅軟件或工具",
+  description: `提交你的工具到， ${config.site.name} 讓更多人知道！`,
   openGraph: { ...metadataConfig.openGraph, url: "/submit" },
   alternates: { ...metadataConfig.alternates, canonical: "/submit" },
 }
@@ -32,20 +32,13 @@ export default async function SubmitPage() {
           <Card hover={false}>
             <Prose className="text-sm/normal">
               <p>
-                <strong>Note:</strong> Submission alone does not guarantee a feature. Please make
-                sure the software you're submitting is:
+                <strong>注意:</strong> 提交並不保證一定會被展示。請確保你提交嘅軟件符合以下條件：
               </p>
 
               <ul className="[&_li]:p-0 list-inside p-0">
-                <li>Open source</li>
-                <li>Free to use or can be self-hosted</li>
-                <li>Actively maintained</li>
-                <li>
-                  An{" "}
-                  <Link href="/alternatives" prefetch={false}>
-                    alternative to popular software
-                  </Link>
-                </li>
+                <li>工具名稱</li>
+                <li>網站URL</li>
+                <li>工具類別</li>
               </ul>
             </Prose>
           </Card>

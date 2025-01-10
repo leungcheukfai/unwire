@@ -41,12 +41,12 @@ export const ToolFilters = ({ categories, placeholder }: ToolFiltersProps) => {
   }, [filters]);
 
   const sortOptions = [
-    { value: "publishedAt.desc", label: "Latest" },
-    { value: "name.asc", label: "Name A-Z" },
-    { value: "name.desc", label: "Name Z-A" },
-    { value: "freeTier.desc", label: "Free Tier" },
-    { value: "aiPowered.desc", label: "Ai Powered" },
-    { value: "chinese.desc", label: "Chinese" },
+    { value: "publishedAt.desc", label: "最新工具" },
+    { value: "name.asc", label: "名稱 A-Z" },
+    { value: "name.desc", label: "名稱 Z-A" },
+    { value: "freeTier.desc", label: "免費使用" },
+    { value: "aiPowered.desc", label: "AI 工具" },
+    { value: "chinese.desc", label: "中文介面" },
   ];
 
   return (
@@ -60,7 +60,7 @@ export const ToolFilters = ({ categories, placeholder }: ToolFiltersProps) => {
           size="lg"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          placeholder={placeholder || "Search tools..."}
+          placeholder={placeholder || "搜尋工具..."}
           className="w-full truncate pl-10"
         />
       </div>
@@ -72,7 +72,7 @@ export const ToolFilters = ({ categories, placeholder }: ToolFiltersProps) => {
           value={filters.category}
           onChange={(e) => updateFilters({ category: e.target.value })}
         >
-          <option value="">All categories</option>
+          <option value="">所有類別</option>
 
           {categories.map((category) => (
             <option key={category.slug} value={category.slug}>
@@ -88,7 +88,7 @@ export const ToolFilters = ({ categories, placeholder }: ToolFiltersProps) => {
         value={filters.sort}
         onChange={(e) => updateFilters({ sort: e.target.value })}
       >
-        <option value="">Order by</option>
+        <option value="">排序</option>
 
         {sortOptions.map((option) => (
           <option key={option.value} value={option.value}>
