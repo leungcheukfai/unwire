@@ -62,7 +62,7 @@ export default async function AdvertisePage() {
           話畀我哋知更多關於你公司嘅資料，我哋會盡快聯絡你！
         </IntroDescription>
 
-        <Button variant="fancy" className="mt-4 min-w-40" asChild>
+        <Button variant="fancy" className="mt-4  bg-[#01DD85] min-w-40" asChild>
           <Link href={`mailto:${config.site.email}`} target="_blank" rel="noopener noreferrer">
             聯絡我們
           </Link>

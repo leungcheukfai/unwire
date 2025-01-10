@@ -150,11 +150,10 @@ export const AdsPicker = ({ className, ads, ...props }: AdsCalendarProps) => {
           )}
 
           <Button
-            variant="fancy"
             size="lg"
             disabled={!hasSelections || isPending}
             isPending={isPending}
-            className="max-sm:w-full sm:-my-2"
+            className="max-sm:w-full sm:-my-2 bg-[#01DD85]"
             onClick={handleCheckout}
           >
             立即購買
