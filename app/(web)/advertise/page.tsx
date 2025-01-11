@@ -12,7 +12,7 @@ import { findAds } from "~/server/web/ads/queries"
 
 export const metadata: Metadata = {
   title: `在${config.site.name} 推廣你的軟件或工具`,
-  description: `立即在${config.site.name} 推廣你嘅業務或軟件，接觸廣大嘅香港科技愛好者。`,
+  description: `立即在${config.site.name} 推廣你的業務或軟件，接觸廣大的香港科技愛好者。`,
   openGraph: { ...metadataConfig.openGraph, url: "/advertise" },
   alternates: { ...metadataConfig.alternates, canonical: "/advertise" },
 }
@@ -26,7 +26,7 @@ export default async function AdvertisePage() {
         <IntroTitle>{`${metadata.title}`}</IntroTitle>
 
         <IntroDescription className="max-w-3xl">
-          推廣你嘅業務或軟件，接觸廣大嘅香港科技愛好者。
+          推廣你的業務或軟件，接觸廣大的香港科技愛好者。
           {/* Check our{" "}
           <a href={config.links.analytics} target="_blank" rel="noopener noreferrer nofollow">
             real-time analytics
@@ -59,7 +59,7 @@ export default async function AdvertisePage() {
         </IntroTitle>
 
         <IntroDescription className="max-w-lg">
-          話畀我哋知更多關於你公司嘅資料，我哋會盡快聯絡你！
+          請提供更多關於你們公司的資料，我們會盡快聯絡你！
         </IntroDescription>
 
         <Button variant="fancy" className="mt-4 min-w-40" asChild>

@@ -25,7 +25,7 @@ const ToolList = ({ tools, showAd = true, ...props }: ToolListProps) => {
         </Fragment>
       ))}
 
-      {!tools.length && <EmptyList>No tools found.</EmptyList>}
+      {!tools.length && <EmptyList>未找到任何工具。</EmptyList>}
     </Grid>
   );
 };

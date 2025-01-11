@@ -158,7 +158,7 @@ export const Header = ({
             href={config.links.instagram}
             target="_blank"
             rel="nofollow noreferrer"
-            title="追蹤我哋嘅Instagram專頁"
+            title="追蹤我們的Instagram專頁"
           >
             <BrandInstagramIcon className="size-4" />
           </NavigationLink>
@@ -166,7 +166,7 @@ export const Header = ({
             href={config.links.facebook}
             target="_blank"
             rel="nofollow noreferrer"
-            title="追蹤我哋嘅Facebook專頁"
+            title="追蹤我我們的Facebook專頁"
           >
             <BrandFacebookIcon className="size-4" />
           </NavigationLink>

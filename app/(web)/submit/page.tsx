@@ -9,7 +9,7 @@ import { config } from "~/config"
 import { metadataConfig } from "~/config/metadata"
 
 export const metadata: Metadata = {
-  title: "提交你嘅軟件或工具",
+  title: "提交你軟件或工具",
   description: `提交你的工具到， ${config.site.name} 讓更多人知道！`,
   openGraph: { ...metadataConfig.openGraph, url: "/submit" },
   alternates: { ...metadataConfig.alternates, canonical: "/submit" },
@@ -32,7 +32,7 @@ export default async function SubmitPage() {
           <Card hover={false}>
             <Prose className="text-sm/normal">
               <p>
-                <strong>注意:</strong> 提交並不保證一定會被展示。請確保你提交嘅軟件符合以下條件：
+                <strong>注意:</strong> 提交並不保證一定會被展示。請確保你提交的軟件符合以下條件：
               </p>
 
               <ul className="[&_li]:p-0 list-inside p-0">

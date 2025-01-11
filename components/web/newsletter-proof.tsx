@@ -27,7 +27,7 @@ export const NewsletterProof = ({ className, ...props }: HTMLAttributes<HTMLElem
       ))}
 
       <p className="w-full text-xs text-muted">
-        超過 {formatNumber(config.stats.subscribers, "standard")}人已經訂閱UNWIRE科技電子報
+        超過{formatNumber(config.stats.subscribers, "standard")}人已經訂閱UNWIRE科技電子報
       </p>
     </div>
   )

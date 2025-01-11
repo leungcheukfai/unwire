@@ -146,7 +146,7 @@ export const AdsPicker = ({ className, ads, ...props }: AdsCalendarProps) => {
               )}
             </>
           ) : (
-            <p>請選擇至少一種廣告類型嘅日期</p>
+            <p>請選擇至少一種廣告類型的日期</p>
           )}
 
           <Button
