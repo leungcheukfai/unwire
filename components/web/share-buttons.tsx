@@ -74,7 +74,7 @@ export const ShareButtons = ({ title, ...props }: ShareButtonsProps) => {
 
   return (
     <Stack {...props}>
-      <H5 as="strong">Share:</H5>
+      <H5 as="strong">分享:</H5>
 
       <Stack size="sm">
         <TooltipProvider delayDuration={500} disableHoverableContent>

@@ -137,7 +137,7 @@ export default async function ToolPage(props: PageProps) {
             {!!tool.alternatives.length && (
               <>
                 <h3 className="sr-only">
-                  Open Source Alternative to{" "}
+                  其他工具選擇{" "}
                   {joinAsSentence(
                     tool.alternatives.map(
                       ({ alternative }) => alternative?.name
@@ -229,7 +229,7 @@ export default async function ToolPage(props: PageProps) {
               direction="column"
               className="w-full max-md:order-6"
             >
-              <H5 as="strong">Categories:</H5>
+              <H5 as="strong">工具分類:</H5>
 
               <Stack>
                 {tool.categories?.map(({ category }) => (
