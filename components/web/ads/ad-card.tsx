@@ -36,7 +36,7 @@ const AdCard = async ({ className, type, ...props }: AdCardProps) => {
       {...props}
     >
       <ExternalLink
-        href={updateUrlWithSearchParams(ad.website, { ref: "openalternative" })}
+        href={updateUrlWithSearchParams(ad.website, { ref: "unwire.hk" })}
         target={isDefault ? "_self" : undefined}
         rel={!isDefault ? "noopener noreferrer nofollow" : undefined}
         eventName="click_ad"

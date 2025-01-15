@@ -17,7 +17,7 @@ export const Advertisers = ({ className, ...props }: HTMLAttributes<HTMLDivEleme
       {config.ads.advertisers.map(ad => (
         <ExternalLink
           key={ad.name}
-          href={updateUrlWithSearchParams(ad.websiteUrl, { ref: "openalternative" })}
+          href={updateUrlWithSearchParams(ad.websiteUrl, { ref: "unwire.hk" })}
           eventName="click_ad"
           eventProps={{ url: ad.websiteUrl, type: "Advertisers" }}
           className="flex flex-wrap items-center gap-x-2 font-semibold opacity-85 hover:opacity-100 md:text-lg"
