@@ -289,7 +289,7 @@ export default async function ToolPage(props: PageProps) {
       {/* Related */}
       <Suspense
         fallback={
-          <Listing title={`與${tool.name}相似的工具:`}>
+          <Listing title={`與 ${tool.name}相似的工具:`}>
             <ToolListSkeleton count={3} />
           </Listing>
         }
