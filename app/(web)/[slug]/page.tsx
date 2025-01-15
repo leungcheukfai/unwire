@@ -146,7 +146,7 @@ export default async function ToolPage(props: PageProps) {
                 </h3>
 
                 <Stack>
-                  <span className="text-sm">Open Source Alternative to:</span>
+                  <span className="text-sm">其他替代方案:</span>
 
                   {tool.alternatives.map(({ alternative }) => (
                     <NavigationLink
@@ -289,7 +289,7 @@ export default async function ToolPage(props: PageProps) {
       {/* Related */}
       <Suspense
         fallback={
-          <Listing title={`Open source alternatives similar to ${tool.name}:`}>
+          <Listing title={`與${tool.name}相似的工具:`}>
             <ToolListSkeleton count={3} />
           </Listing>
         }
