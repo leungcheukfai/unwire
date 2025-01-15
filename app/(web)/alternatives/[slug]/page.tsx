@@ -108,12 +108,12 @@ export default async function AlternativePage(props: PageProps) {
   return (
     <>
       <Intro>
-        <IntroTitle>Open Source {alternative.name} Alternatives</IntroTitle>
+        <IntroTitle>{alternative.name}的其他選擇</IntroTitle>
 
         <IntroDescription className="max-w-4xl">
           {alternative._count.tools
-            ? `A curated collection of the ${alternative._count.tools} best open source alternatives to ${alternative.name}.`
-            : `No open source ${alternative.name} alternatives found yet.`}
+            ? `為你揀選的 ${alternative._count.tools} 最佳其他方案 ${alternative.name}.`
+            : `沒有找到與 ${alternative.name} 的其他方案。`}
         </IntroDescription>
       </Intro>
 
@@ -122,14 +122,13 @@ export default async function AlternativePage(props: PageProps) {
           <Section.Content className="gap-12 md:gap-14 lg:gap-16">
             <Prose>
               <p>
-                The best open source alternative to {alternative.name} is {bestTools.shift()}. If
-                that doesn't suit you, we've compiled a{" "}
-                <Link href="/about#how-are-rankings-calculated">ranked list</Link> of other open
-                source {alternative.name} alternatives to help you find a suitable replacement.
+                {alternative.name} 最佳的替代方案是 {bestTools.shift()}。如果那不適合您， 
+                我們已經編制了一個 <Link href="/about#how-are-rankings-calculated">排名列表</Link>， 
+                收錄了其他的 {alternative.name} 替代方案，以幫助您找到合適的替代品。
                 {!!bestTools.length && (
                   <>
                     {" "}
-                    Other interesting open source
+                    其他不錯的工具選擇
                     {bestTools.length === 1
                       ? ` alternative to ${alternative.name} is `
                       : ` alternatives to ${alternative.name} are: `}
@@ -147,7 +146,7 @@ export default async function AlternativePage(props: PageProps) {
 
               {!!bestCategories.length && (
                 <p>
-                  {alternative.name} alternatives are mainly {bestCategories.shift()}
+                  {alternative.name}的替代方案主要是{bestCategories.shift()}
                   {!!bestCategories.length && " but may also be "}
                   {bestCategories.map((category, index) => (
                     <Fragment key={index}>
@@ -156,8 +155,7 @@ export default async function AlternativePage(props: PageProps) {
                       {category}
                     </Fragment>
                   ))}
-                  . Browse these if you want a narrower list of alternatives or looking for a
-                  specific functionality of {alternative.name}.
+                  . 如果您想要更好的替代方案列表，或正在尋找某種特定功能的話，可以瀏覽以下選項 {alternative.name}.
                 </p>
               )}
 

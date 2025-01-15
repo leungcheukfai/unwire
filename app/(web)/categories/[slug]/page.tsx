@@ -30,7 +30,7 @@ const getMetadata = (category: CategoryOne): Metadata => {
 
   return {
     title: `Open Source ${name}`,
-    description: `A curated collection of the ${category._count.tools} best open source ${name} for inspiration and reference. Each listing includes a website screenshot along with a detailed review of its features.`,
+    description: `A curated collection of the ${category._count.tools} best open source ${name} 供您參考與獲取靈感。每個列表項目都包含網站截圖以及其功能的詳細評論。`,
   }
 }
 
