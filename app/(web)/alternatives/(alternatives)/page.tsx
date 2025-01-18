@@ -12,7 +12,7 @@ type PageProps = {
 
 export const metadata: Metadata = {
   title: "熱門工具及軟件方案",
-  description: "瀏覽頂尖專工具及軟件，搵出最適合你的軟件工具。",
+  description: "探索最優秀的專業工具及軟件，挑選最適合你的方案！",
   openGraph: { ...metadataConfig.openGraph, url: "/alternatives" },
   alternates: { ...metadataConfig.alternates, canonical: "/alternatives" },
 }
