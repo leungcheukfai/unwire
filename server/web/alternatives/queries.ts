@@ -5,7 +5,7 @@ import { alternativeManyPayload, alternativeOnePayload } from "~/server/web/alte
 import type { alternativesSearchParams } from "~/server/web/alternatives/search-params"
 import { prisma } from "~/services/prisma"
 
-export const searchAlternatives = cache(
+export const searchAlternatives =
   async (
     { q, page, sort, perPage }: inferParserType<typeof alternativesSearchParams>,
     { where, ...args }: Prisma.AlternativeFindManyArgs,
@@ -48,11 +48,9 @@ export const searchAlternatives = cache(
     ])
 
     return { alternatives, totalCount }
-  },
-  ["alternatives"],
-)
+  }
 
-export const findAlternatives = cache(
+export const findAlternatives =
   async ({ where, orderBy, ...args }: Prisma.AlternativeFindManyArgs) => {
     return prisma.alternative.findMany({
       ...args,
@@ -60,10 +58,7 @@ export const findAlternatives = cache(
       where: { tools: { some: { tool: { status: ToolStatus.Published } } }, ...where },
       select: alternativeManyPayload,
     })
-  },
-  ["alternatives"],
-)
-
+  }
 export const findAlternativeSlugs = async ({
   where,
   orderBy,
