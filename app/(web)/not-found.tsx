@@ -10,16 +10,15 @@ export default function NotFound() {
 
   return (
     <Intro>
-      <IntroTitle>404 Not Found</IntroTitle>
+      <IntroTitle>404 找不到頁面</IntroTitle>
 
       <IntroDescription className="max-w-xl">
-        We're sorry, but the page {pathname} could not be found. You may have mistyped the address
-        or the page may have moved.
+        抱歉，我們無法找到  {pathname} 頁面。 可能是您輸入的網址有誤，或者該頁面已經被剷除。
       </IntroDescription>
 
       <Button size="lg" className="mt-4" asChild>
         <Link href="/" prefetch={false}>
-          Go back home
+          返回首頁
         </Link>
       </Button>
     </Intro>

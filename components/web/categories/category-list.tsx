@@ -16,7 +16,7 @@ const CategoryList = ({ categories, className, ...props }: CategoryListProps) =>
         <CategoryCard key={category.slug} category={category} />
       ))}
 
-      {!categories.length && <EmptyList>No categories found.</EmptyList>}
+      {!categories.length && <EmptyList>找不到任何分類。</EmptyList>}
     </Grid>
   )
 }

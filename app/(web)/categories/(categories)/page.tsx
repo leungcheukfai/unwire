@@ -7,7 +7,7 @@ import { metadataConfig } from "~/config/metadata"
 
 export const metadata: Metadata = {
   title: "工具分類",
-  description: "瀏覽熱門工具，搵出最適合你的軟件及工具選擇。",
+  description: "瀏覽熱門工具，挑選最適合你的軟件和工具！",
   openGraph: { ...metadataConfig.openGraph, url: "/categories" },
   alternates: { ...metadataConfig.alternates, canonical: "/categories" },
 }

@@ -108,11 +108,11 @@ export default async function AlternativePage(props: PageProps) {
   return (
     <>
       <Intro>
-        <IntroTitle>{alternative.name}的其他推薦選擇</IntroTitle>
+        <IntroTitle>{alternative.name} 的其他推薦選擇</IntroTitle>
 
         <IntroDescription className="max-w-4xl">
           {alternative._count.tools
-            ? `為你挑選的 ${alternative._count.tools}個${alternative.name} 替代方案。`
+            ? `為你挑選的${alternative._count.tools}個 ${alternative.name} 替代方案。`
             : `沒有找到與 ${alternative.name} 的其他方案。`}
         </IntroDescription>
       </Intro>
