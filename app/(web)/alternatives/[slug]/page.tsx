@@ -189,7 +189,7 @@ export default async function AlternativePage(props: PageProps) {
                 asChild
               >
                 <Link href="/submit" prefetch={false}>
-                  Suggest an alternative
+                  建議替代方案
                 </Link>
               </Button>
             </InlineMenu>

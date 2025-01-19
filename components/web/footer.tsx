@@ -82,7 +82,7 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              <Tooltip tooltip="Contact us">
+              <Tooltip tooltip="聯絡我們">
                 <NavigationLink
                   href={`mailto:${config.site.email}`}
                   target="_blank"
@@ -93,7 +93,7 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
                 </NavigationLink>
               </Tooltip>
 
-              <Tooltip tooltip="Follow us on X/Twitter">
+              <Tooltip tooltip="追蹤我們的X/Twitter專頁">
                 <NavigationLink
                   href={config.links.twitter}
                   target="_blank"
@@ -103,9 +103,9 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
                 </NavigationLink>
               </Tooltip>
 
-              <Tooltip tooltip="Follow us on Bluesky">
+              <Tooltip tooltip="追蹤我們的Instagram專頁">
                 <NavigationLink
-                  href={config.links.bluesky}
+                  href={config.links.instagram}
                   target="_blank"
                   rel="nofollow noreferrer"
                 >
@@ -113,7 +113,7 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
                 </NavigationLink>
               </Tooltip>
 
-              <Tooltip tooltip="Follow us on LinkedIn">
+              <Tooltip tooltip="追蹤我們的LinkedIn專頁">
                 <NavigationLink
                   href={config.links.linkedin}
                   target="_blank"
@@ -123,9 +123,9 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
                 </NavigationLink>
               </Tooltip>
 
-              <Tooltip tooltip="View source code">
+              <Tooltip tooltip="追蹤我們的Facebook專頁">
                 <NavigationLink
-                  href={config.links.github}
+                  href={config.links.facebook}
                   target="_blank"
                   rel="nofollow noreferrer"
                 >

@@ -33,8 +33,8 @@ const AlternativeCard = ({ alternative, showCount, ...props }: AlternativeCardPr
 
         {showCount && (
           <CardFooter>
-            {alternative._count.tools} {plur("alternative", alternative._count.tools)}
-          </CardFooter>
+            {alternative._count.tools} 個替代方案
+        </CardFooter>
         )}
       </Link>
     </Card>

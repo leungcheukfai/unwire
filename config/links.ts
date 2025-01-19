@@ -4,7 +4,7 @@ export const linksConfig = {
   author: "https://ericleung.hk",
   twitter: "https://x.com/unwirelife",
   bluesky: "https://www.instagram.com/unwirehk",
-  linkedin: "https://www.instagram.com/unwirehk",
+  linkedin: "https://www.linkedin.com/company/unwire.hk",
   github: "https://www.instagram.com/unwirehk",
   analytics: "https://www.linkedin.com/company/unwire.hk",
   facebook: "https://www.facebook.com/unwirehk",
