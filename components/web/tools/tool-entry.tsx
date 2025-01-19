@@ -78,7 +78,7 @@ const ToolEntry = ({ className, tool, ...props }: ToolEntryProps) => {
 
       <Button suffix={<ArrowRightIcon />} className="self-start" asChild>
         <Link href={href} prefetch={false}>
-          Read more
+          了解更多
         </Link>
       </Button>
     </div>

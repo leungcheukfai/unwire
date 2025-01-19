@@ -24,13 +24,13 @@ type ToolCardProps = ComponentProps<typeof Card> & {
 
 const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
   const insights = [
-    { label: "Free Tier", value: tool.freeTier },
+    { label: "免費試用", value: tool.freeTier },
     {
-      label: "Chinese",
+      label: "中文介面",
       value: tool.chinese,
     },
     {
-      label: "Ai Powered ",
+      label: "AI智能驅動",
       value: tool.aiPowered,
     },
   ];

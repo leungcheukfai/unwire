@@ -152,7 +152,7 @@ export const Footer = ({ children, className, hideNewsletter, ...props }: Footer
           <NavigationLink href="/advertise">與我們合作</NavigationLink>
           <NavigationLink href="/submit">免費新增工具</NavigationLink>
           <NavigationLink href="/about">關於我們</NavigationLink>
-          <NavigationLink href="/blog">BLOG</NavigationLink>
+          {/* <NavigationLink href="/blog">BLOG</NavigationLink> */}
         </Stack>
 
         <Stack className="gap-x-4 text-sm/normal flex-col items-start md:col-span-3">

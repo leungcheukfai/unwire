@@ -175,7 +175,7 @@ export default async function ToolPage(props: PageProps) {
                     eventName="click_website"
                     eventProps={{ url: tool.website }}
                   >
-                    Visit {tool.name}
+                    瀏覽 {tool.name}
                   </ExternalLink>
                 </Button>
               )}
