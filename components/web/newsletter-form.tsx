@@ -30,7 +30,7 @@ export const NewsletterForm = ({
   medium = "subscribe_form",
   placeholder = "請輸入你的電郵地址",
   size = "md",
-  buttonProps = { size: "sm", children: "Subscribe" },
+  buttonProps = { size: "sm", children: "訂閱" },
   ...props
 }: NewsletterFormProps) => {
   const form = useForm<NewsletterSchema>({
