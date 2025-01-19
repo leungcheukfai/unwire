@@ -41,9 +41,9 @@ export const Insights = ({
         {freeTier || toolPrice ? (
           <p className="text-xs text-gray-500">
             <span className="text-green-500">{(freeTier || toolPrice) && "$ "}</span>
-            {freeTier && "free "}
+            {freeTier && "免費試用"}
             {freeTier && toolPrice && "+ "}
-            {toolPrice && `from $${toolPrice}/mo`}
+            {toolPrice && `月費由 $${toolPrice}起`}
           </p>
         ) : null}
     </div>

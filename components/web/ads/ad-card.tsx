@@ -59,7 +59,7 @@ const AdCard = async ({ className, type, ...props }: AdCardProps) => {
         <CardDescription className="mb-auto line-clamp-4">{ad.description}</CardDescription>
 
         <Button className="w-full pointer-events-none" suffix={<ArrowUpRightIcon />} asChild>
-          <span>{isDefault ? "了解更多" : `Visit ${ad.name}`}</span>
+          <span>{isDefault ? "了解更多" : `瀏覽 ${ad.name}`}</span>
         </Button>
 
         {/* {isDefault && (

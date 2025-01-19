@@ -24,7 +24,7 @@ type ToolCardProps = ComponentProps<typeof Card> & {
 
 const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
   const insights = [
-    { label: "免費試用", value: tool.freeTier },
+    { label: "免費s試用", value: tool.freeTier },
     {
       label: "中文介面",
       value: tool.chinese,
@@ -60,9 +60,9 @@ const ToolCard = ({ className, tool, isRelated, ...props }: ToolCardProps) => {
             <span className="text-green-500">
               {(tool.freeTier || tool.price) && "$ "}
             </span>
-            {tool.freeTier && "free "}
+            {tool.freeTier && "免費試用"}
             {tool.freeTier && tool.price && "+"}
-            {tool.price && ` from $${tool.price}/mo`}
+            {tool.price && `月費由$${tool.price}起`}
           </p>
         ) : null}
       </Link>

@@ -56,7 +56,7 @@ export const AlternativeCardExternal = ({
         )}
 
         <Button className="pointer-events-none md:w-full" suffix={<ArrowUpRightIcon />} asChild>
-          <span>Visit {alternative.name}</span>
+          <span>瀏覽 {alternative.name}</span>
         </Button>
       </ExternalLink>
     </Card>

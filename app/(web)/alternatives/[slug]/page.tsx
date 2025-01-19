@@ -122,40 +122,40 @@ export default async function AlternativePage(props: PageProps) {
           <Section.Content className="gap-12 md:gap-14 lg:gap-16">
             <Prose>
               <p>
-                {alternative.name} 最佳的替代方案是 {bestTools.shift()}。如果那不適合您， 
-                我們已經編制了一個 <Link href="/about#how-are-rankings-calculated">排名列表</Link>， 
-                收錄了其他的 {alternative.name} 替代方案，以幫助您找到合適的替代品。
+              {alternative.name} 最佳的替代方案是 {bestTools.shift()}。如果這不適合您， 
+              我們已整理了一個 <Link href="/about#how-are-rankings-calculated">排名列表</Link>，
+              包含其他 {alternative.name} 的替代方案，幫助您找到最合適的工具。
                 {!!bestTools.length && (
                   <>
                     {" "}
-                    其他不錯的工具選擇
+                    其他不錯的替代工具包括
                     {bestTools.length === 1
-                      ? ` alternative to ${alternative.name} is `
-                      : ` alternatives to ${alternative.name} are: `}
+                      ? ` ${alternative.name} 的替代方案是 `
+                      : ` ${alternative.name} 的替代工具有: `}
                     {bestTools.map((alt, index) => (
                       <Fragment key={index}>
-                        {index > 0 && index !== bestTools.length - 1 && ", "}
-                        {index > 0 && index === bestTools.length - 1 && " and "}
+                        {index > 0 && index !== bestTools.length - 1 && "，"}
+                        {index > 0 && index === bestTools.length - 1 && " 和 "}
                         {alt}
                       </Fragment>
                     ))}
-                    .
+                    。
                   </>
                 )}
               </p>
 
               {!!bestCategories.length && (
                 <p>
-                  {alternative.name}的替代方案主要是{bestCategories.shift()}
-                  {!!bestCategories.length && " but may also be "}
+                  {alternative.name} 的替代方案主要針對 {bestCategories.shift()}
+                  {!!bestCategories.length && "，但也可能包括 "}
                   {bestCategories.map((category, index) => (
                     <Fragment key={index}>
-                      {index > 0 && index !== bestCategories.length - 1 && ", "}
-                      {index > 0 && index === bestCategories.length - 1 && " or "}
+                      {index > 0 && index !== bestCategories.length - 1 && "，"}
+                      {index > 0 && index === bestCategories.length - 1 && " 或 "}
                       {category}
                     </Fragment>
                   ))}
-                  . 如果您想要更好的替代方案列表，或正在尋找某種特定功能的話，可以瀏覽以下選項 {alternative.name}.
+                  。如果您希望查看更多替代工具，或者正在尋找具備某些特定功能的解決方案，可以瀏覽以下的 {alternative.name} 替代選項。
                 </p>
               )}
 
