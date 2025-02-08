@@ -29,8 +29,8 @@ const getMetadata = (category: CategoryOne): Metadata => {
   const name = category.label || `${category.name} Tools`
 
   return {
-    title: `Open Source ${name}`,
-    description: `A curated collection of the ${category._count.tools} best open source ${name} 供您參考與獲取靈感。每個列表項目都包含網站截圖以及其功能的詳細評論。`,
+    title: `最適合香港的${name}工具`,
+    description: `${category._count.tools}個最適合香港的${name}供您參考與獲取靈感。每個列表項目都包含網站截圖以及其功能的詳細評論。`,
   }
 }
 

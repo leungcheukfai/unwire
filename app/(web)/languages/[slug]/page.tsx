@@ -27,8 +27,8 @@ const getLanguage = cache(async ({ params }: PageProps) => {
 
 const getMetadata = (language: LanguageOne): Metadata => {
   return {
-    title: `${language.name} Open Source Projects`,
-    description: `A curated collection of the ${language._count.tools} best open source software written in ${language.name}. Find the most popular and trending open source projects to learn from, contribute to, or use in your own projects.`,
+    title: `${language.name}工具`,
+    description: `${language._count.tools}個最適合香港的${language.name}. 供您參考與獲取靈感。每個列表項目都包含網站截圖以及其功能的詳細評論。`,
   }
 }
 
