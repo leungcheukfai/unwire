@@ -30,7 +30,7 @@ const getMetadata = (category: CategoryOne): Metadata => {
 
   return {
     title: `最適合香港的${name}工具`,
-    description: `${category._count.tools}個最適合香港的${name}供您參考與獲取靈感。每個列表項目都包含網站截圖以及其功能的詳細評論。`,
+    description: `${category._count.tools} 個最適合香港的 ${name}，供您參考與選擇。每個工具均附有網站截圖及詳細功能評測，助您輕鬆找到最佳方案。`,
   }
 }
 
